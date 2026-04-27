@@ -1,0 +1,48 @@
+---
+id: 80981
+name: 祝日マスターカレンダーを作成する
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: insert
+  query: |-
+    SELECT * FROM UNNEST([
+      STRUCT(DATE '2025-01-01' AS holiday_date, '元日' AS holiday_name),
+      STRUCT(DATE '2025-01-13', '成人の日'),
+      STRUCT(DATE '2025-02-11', '建国記念の日'),
+      STRUCT(DATE '2025-02-23', '天皇誕生日'),
+      STRUCT(DATE '2025-02-24', '天皇誕生日 振替休日'),
+      STRUCT(DATE '2025-03-20', '春分の日'),
+      STRUCT(DATE '2025-04-29', '昭和の日'),
+      STRUCT(DATE '2025-05-03', '憲法記念日'),
+      STRUCT(DATE '2025-05-04', 'みどりの日'),
+      STRUCT(DATE '2025-05-05', 'こどもの日'),
+      STRUCT(DATE '2025-05-06', '憲法記念日 振替休日'),
+      STRUCT(DATE '2025-07-21', '海の日'),
+      STRUCT(DATE '2025-08-11', '山の日'),
+      STRUCT(DATE '2025-09-15', '敬老の日'),
+      STRUCT(DATE '2025-09-23', '秋分の日'),
+      STRUCT(DATE '2025-10-13', 'スポーツの日'),
+      STRUCT(DATE '2025-11-03', '文化の日'),
+      STRUCT(DATE '2025-11-23', '勤労感謝の日'),
+      STRUCT(DATE '2025-11-24', '勤労感謝の日 振替休日'),
+
+      STRUCT(DATE '2025-01-02', '年末年始'),
+      STRUCT(DATE '2025-01-03', '年末年始'),
+      STRUCT(DATE '2025-01-04', '年末年始'),
+      STRUCT(DATE '2025-12-29', '年末年始'),
+      STRUCT(DATE '2025-12-30', '年末年始'),
+      STRUCT(DATE '2025-12-31', '年末年始')
+    ]);
+  destination_dataset: kimura_test
+  destination_table: holiday_master
+  write_disposition: truncate
+  custom_variables: []
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications: []

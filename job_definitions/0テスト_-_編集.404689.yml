@@ -1,0 +1,50 @@
+---
+id: 404689
+name: 0テスト - 編集
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: databricks
+    databricks_connection:
+      id: 13
+      name: pN検証環境（CS Demo）
+    catalog_name: primenumer_aws_playground
+    schema_name: test_by_kimura
+    query: SELECT * FROM zero_test
+    fetch_rows: 10000
+    custom_variables: []
+  out:
+    type: google_spreadsheets_v4
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_id: 1JV07h0Bn4WB-BZHvIg0N9dYVYmo010EHdLoGP4AvvtI
+    worksheet_title: out-1212
+    timezone: Asia/Tokyo
+    value_input_option: RAW
+    mode: replace
+    sorts: []
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: string
+    - name: name
+      src: name
+      default: ''
+      type: string
+    - name: age
+      src: age
+      default: ''
+      type: long
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

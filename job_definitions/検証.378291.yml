@@ -1,0 +1,165 @@
+---
+id: 378291
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: google_drive
+    google_drive_connection:
+      id: 325
+      name: csdemo-GoogleDrive-kimura
+    folder_id: 1uwrFP5N2n9_a9yGaWmF8HN6MNjCN6_tv
+    file_match_pattern: test.json
+    decompression_type:
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$.data"
+      default_timezone: UTC
+      columns:
+      - name: product_id
+        type: long
+      - name: code
+        type: string
+      - name: barcode
+        type: string
+      - name: spec1
+        type: string
+      - name: spec2
+        type: string
+      - name: stock_type_id
+        type: long
+      - name: lot
+        type: string
+      - name: expiration_date
+        type: string
+        format: "%Y-%m-%d"
+      - name: location
+        type: string
+      - name: quantity
+        type: long
+      - name: arrival_date
+        type: timestamp
+        format: "%Y-%m-%d %H:%M:%S"
+      - name: arrival_scheduled_date
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: arrival_scheduled_quantity
+        type: long
+      - name: arrival_order_no
+        type: string
+      - name: comment
+        type: string
+      - name: suplier_name
+        type: string
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '0902_json'
+    auto_create_dataset: false
+    mode: append
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options:
+    - name: expiration_date
+      type: TIMESTAMP
+      mode: NULLABLE
+      timestamp_format: "%Y-%m-%d"
+      timezone: Etc/UTC
+      description: ''
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: product_id
+      src: product_id
+      default: ''
+      type: long
+    - name: code
+      src: code
+      default: ''
+      type: string
+    - name: barcode
+      src: barcode
+      default: ''
+      type: string
+    - name: spec1
+      src: spec1
+      default: ''
+      type: string
+    - name: spec2
+      src: spec2
+      default: ''
+      type: string
+    - name: stock_type_id
+      src: stock_type_id
+      default: ''
+      type: long
+    - name: lot
+      src: lot
+      default: ''
+      type: string
+    - name: expiration_date
+      src: expiration_date
+      default: ''
+      type: string
+    - name: location
+      src: location
+      default: ''
+      type: string
+    - name: quantity
+      src: quantity
+      default: ''
+      type: long
+    - name: arrival_date
+      src: arrival_date
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d %H:%M:%S"
+    - name: arrival_scheduled_date
+      src: arrival_scheduled_date
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: arrival_scheduled_quantity
+      src: arrival_scheduled_quantity
+      default: ''
+      type: long
+    - name: arrival_order_no
+      src: arrival_order_no
+      default: ''
+      type: string
+    - name: comment
+      src: comment
+      default: ''
+      type: string
+    - name: suplier_name
+      src: suplier_name
+      default: ''
+      type: string
+    string_replacement_columns:
+      target_columns:
+        expiration_date:
+        - type: regexp_replace
+          pattern: ''
+          to: '1970-01-01'
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

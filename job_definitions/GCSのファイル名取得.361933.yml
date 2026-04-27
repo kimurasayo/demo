@@ -1,0 +1,176 @@
+---
+id: 361933
+name: GCSのファイル名取得
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: http
+    url: https://storage.googleapis.com/storage/v1/b/test-250711/o
+    method: GET
+    user_agent: ''
+    charset: UTF-8
+    open_timeout: 2000
+    read_timeout: 10000
+    max_retries: 5
+    retry_interval: 10000
+    request_interval: 0
+    input_direct: true
+    success_codes:
+    - '200'
+    http_connection:
+      id: 187
+      name: テスト
+    params: []
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$.items[*]"
+      default_timezone: UTC
+      columns:
+      - name: storageClass
+        type: string
+      - name: timeFinalized
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: timeStorageClassUpdated
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: updated
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: timeCreated
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: etag
+        type: string
+      - name: crc32c
+        type: string
+      - name: md5Hash
+        type: string
+      - name: size
+        type: long
+      - name: kind
+        type: string
+      - name: contentType
+        type: string
+      - name: metageneration
+        type: long
+      - name: generation
+        type: long
+      - name: bucket
+        type: string
+      - name: name
+        type: string
+      - name: mediaLink
+        type: string
+      - name: selfLink
+        type: string
+      - name: id
+        type: long
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '0711'
+    auto_create_dataset: false
+    mode: append
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: kind
+      src: kind
+      default: ''
+      type: string
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: selfLink
+      src: selfLink
+      default: ''
+      type: string
+    - name: mediaLink
+      src: mediaLink
+      default: ''
+      type: string
+    - name: name
+      src: name
+      default: ''
+      type: string
+    - name: bucket
+      src: bucket
+      default: ''
+      type: string
+    - name: generation
+      src: generation
+      default: ''
+      type: long
+    - name: metageneration
+      src: metageneration
+      default: ''
+      type: long
+    - name: contentType
+      src: contentType
+      default: ''
+      type: string
+    - name: storageClass
+      src: storageClass
+      default: ''
+      type: string
+    - name: size
+      src: size
+      default: ''
+      type: long
+    - name: md5Hash
+      src: md5Hash
+      default: ''
+      type: string
+    - name: crc32c
+      src: crc32c
+      default: ''
+      type: string
+    - name: etag
+      src: etag
+      default: ''
+      type: string
+    - name: timeCreated
+      src: timeCreated
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: updated
+      src: updated
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: timeStorageClassUpdated
+      src: timeStorageClassUpdated
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: timeFinalized
+      src: timeFinalized
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

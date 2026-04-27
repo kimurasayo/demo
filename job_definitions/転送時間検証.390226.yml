@@ -1,0 +1,256 @@
+---
+id: 390226
+name: 転送時間検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: 20251021/
+    path_match_pattern: ''
+    decompression_type: guess
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    incremental_loading_enabled: false
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: num_0
+        type: long
+      - name: num_1
+        type: long
+      - name: num_2
+        type: long
+      - name: num_3
+        type: long
+      - name: num_4
+        type: long
+      - name: num_5
+        type: long
+      - name: num_6
+        type: long
+      - name: num_7
+        type: long
+      - name: num_8
+        type: long
+      - name: num_9
+        type: long
+      - name: num_10
+        type: long
+      - name: num_11
+        type: long
+      - name: num_12
+        type: long
+      - name: num_13
+        type: long
+      - name: num_14
+        type: long
+      - name: str_15
+        type: string
+      - name: str_16
+        type: string
+      - name: str_17
+        type: string
+      - name: str_18
+        type: string
+      - name: str_19
+        type: string
+      - name: str_20
+        type: string
+      - name: str_21
+        type: string
+      - name: str_22
+        type: string
+      - name: str_23
+        type: string
+      - name: str_24
+        type: string
+      - name: str_25
+        type: string
+      - name: str_26
+        type: string
+      - name: str_27
+        type: string
+      - name: str_28
+        type: string
+      - name: str_29
+        type: string
+      - name: timestamp
+        type: timestamp
+        format: "%Y-%m-%d %H:%M:%S"
+      quote: "\""
+      escape: "\""
+    decoders: []
+  out:
+    type: snowflake
+    snowflake_connection:
+      id: 63
+      name: csdemo-Snowflake_keypair
+    warehouse: COMPUTE_WH
+    database: TEST_BY_KIMURA
+    schema: PUBLIC
+    table: S3_TEST
+    retry_limit: 12
+    retry_wait: 1000
+    max_retry_wait: 1800000
+    mode: truncate_insert
+    default_timezone: UTC
+    column_options:
+    empty_field_as_null: true
+    batch_size: 50
+    delete_stage_on_error: false
+    escape_with_enclosing: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: num_0
+      src: num_0
+      default: ''
+      type: long
+    - name: num_1
+      src: num_1
+      default: ''
+      type: long
+    - name: num_2
+      src: num_2
+      default: ''
+      type: long
+    - name: num_3
+      src: num_3
+      default: ''
+      type: long
+    - name: num_4
+      src: num_4
+      default: ''
+      type: long
+    - name: num_5
+      src: num_5
+      default: ''
+      type: long
+    - name: num_6
+      src: num_6
+      default: ''
+      type: long
+    - name: num_7
+      src: num_7
+      default: ''
+      type: long
+    - name: num_8
+      src: num_8
+      default: ''
+      type: long
+    - name: num_9
+      src: num_9
+      default: ''
+      type: long
+    - name: num_10
+      src: num_10
+      default: ''
+      type: long
+    - name: num_11
+      src: num_11
+      default: ''
+      type: long
+    - name: num_12
+      src: num_12
+      default: ''
+      type: long
+    - name: num_13
+      src: num_13
+      default: ''
+      type: long
+    - name: num_14
+      src: num_14
+      default: ''
+      type: long
+    - name: str_15
+      src: str_15
+      default: ''
+      type: string
+    - name: str_16
+      src: str_16
+      default: ''
+      type: string
+    - name: str_17
+      src: str_17
+      default: ''
+      type: string
+    - name: str_18
+      src: str_18
+      default: ''
+      type: string
+    - name: str_19
+      src: str_19
+      default: ''
+      type: string
+    - name: str_20
+      src: str_20
+      default: ''
+      type: string
+    - name: str_21
+      src: str_21
+      default: ''
+      type: string
+    - name: str_22
+      src: str_22
+      default: ''
+      type: string
+    - name: str_23
+      src: str_23
+      default: ''
+      type: string
+    - name: str_24
+      src: str_24
+      default: ''
+      type: string
+    - name: str_25
+      src: str_25
+      default: ''
+      type: string
+    - name: str_26
+      src: str_26
+      default: ''
+      type: string
+    - name: str_27
+      src: str_27
+      default: ''
+      type: string
+    - name: str_28
+      src: str_28
+      default: ''
+      type: string
+    - name: str_29
+      src: str_29
+      default: ''
+      type: string
+    - name: timestamp
+      src: timestamp
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d %H:%M:%S"
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

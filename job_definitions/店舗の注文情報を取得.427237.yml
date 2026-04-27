@@ -1,0 +1,76 @@
+---
+id: 427237
+name: 店舗の注文情報を取得
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: mysql
+    mysql_connection:
+      id: 281
+      name: csdemo-CloudMySQL
+    database: test
+    query: SELECT * FROM offline_sales
+    default_timezone: ''
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    use_legacy_datetime_code: false
+    custom_variables: []
+    incremental_loading_enabled: false
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: offline_sales
+    auto_create_dataset: false
+    mode: merge
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    merge_keys:
+    - slip_no
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: slip_no
+      src: slip_no
+      default: ''
+      type: string
+    - name: member_id
+      src: member_id
+      default: ''
+      type: string
+    - name: amount_incl_tax
+      src: amount_incl_tax
+      default: ''
+      type: long
+    - name: amount_excl_tax
+      src: amount_excl_tax
+      default: ''
+      type: long
+    - name: tax_rate
+      src: tax_rate
+      default: ''
+      type: double
+    - name: purchase_at
+      src: purchase_at
+      default: ''
+      type: timestamp
+      format: ''
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

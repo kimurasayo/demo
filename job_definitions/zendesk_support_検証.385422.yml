@@ -1,0 +1,182 @@
+---
+id: 385422
+name: zendesk support 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: http
+    url: https://primenumber.zendesk.com/api/v2/tickets
+    method: GET
+    user_agent: ''
+    charset: UTF-8
+    open_timeout: 2000
+    read_timeout: 10000
+    max_retries: 5
+    retry_interval: 10000
+    request_interval: 0
+    input_direct: true
+    success_codes:
+    - '200'
+    http_connection:
+      id: 213
+      name: zendesk検証
+    params: []
+    pager:
+      from_param: page
+      to_param: ''
+      pages: 1
+      start: 1
+      step: 1
+    custom_variables:
+    - type: timestamp
+      name: "$from$"
+      quantity: 1
+      unit: date
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y-%m-%d %H:%M:%S"
+    - type: timestamp
+      name: "$to$"
+      quantity: 0
+      unit: date
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y-%m-%d %H:%M:%S"
+    parser:
+      type: jsonpath
+      root: "$.tickets"
+      default_timezone: UTC
+      columns:
+      - name: url
+        type: string
+      - name: id
+        type: long
+      - name: external_id
+        type: string
+      - name: via
+        type: json
+      - name: created_at
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S%z"
+      - name: updated_at
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S%z"
+      - name: generated_timestamp
+        type: long
+      - name: type
+        type: string
+      - name: subject
+        type: string
+      - name: raw_subject
+        type: string
+      - name: description
+        type: string
+      - name: priority
+        type: string
+      - name: status
+        type: string
+      - name: recipient
+        type: string
+      - name: requester_id
+        type: long
+      - name: submitter_id
+        type: long
+      - name: assignee_id
+        type: long
+      - name: organization_id
+        type: long
+      - name: group_id
+        type: long
+      - name: collaborator_ids
+        type: json
+      - name: follower_ids
+        type: json
+      - name: email_cc_ids
+        type: json
+      - name: forum_topic_id
+        type: string
+      - name: problem_id
+        type: string
+      - name: has_incidents
+        type: boolean
+      - name: is_public
+        type: boolean
+      - name: due_at
+        type: string
+      - name: tags
+        type: json
+      - name: custom_fields
+        type: json
+      - name: satisfaction_rating
+        type: json
+      - name: sharing_agreement_ids
+        type: json
+      - name: custom_status_id
+        type: long
+      - name: encoded_id
+        type: string
+      - name: fields
+        type: json
+      - name: followup_ids
+        type: json
+      - name: ticket_form_id
+        type: long
+      - name: brand_id
+        type: long
+      - name: allow_channelback
+        type: boolean
+      - name: allow_attachments
+        type: boolean
+      - name: from_messaging_channel
+        type: boolean
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '1001'
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: url
+      src: url
+      default: ''
+      type: string
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: from
+      src: ''
+      default: "$from$"
+      type: string
+    - name: to
+      src: ''
+      default: "$to$"
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels:
+- name: テクサポ
+  id: 3068
+job_schedules: []
+notifications: []

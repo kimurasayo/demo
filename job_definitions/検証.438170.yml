@@ -1,0 +1,75 @@
+---
+id: 438170
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: json0409_no.json
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$.results.rows"
+      default_timezone: UTC
+      columns:
+      - name: wh_pu__purchase_requisitions_organization_name
+        type: json
+      - name: wh_pu__purchase_requisitions_purchase_requisition_cnt
+        type: json
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '260409'
+    auto_create_dataset: false
+    mode: append
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: wh_pu__purchase_requisitions_organization_name
+      src: wh_pu__purchase_requisitions_organization_name
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: wh_pu__purchase_requisitions_organization_name__value__raw
+          json_path: '["value"]["raw"]'
+          type: string
+        - name: wh_pu__purchase_requisitions_organization_name__value__formatted
+          json_path: '["value"]["formatted"]'
+          type: string
+        keep_expanding_json_column: false
+    - name: wh_pu__purchase_requisitions_purchase_requisition_cnt
+      src: wh_pu__purchase_requisitions_purchase_requisition_cnt
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: wh_pu__purchase_requisitions_purchase_requisition_cnt__value__raw
+          json_path: '["value"]["raw"]'
+          type: long
+        - name: wh_pu__purchase_requisitions_purchase_requisition_cnt__value__formatted
+          json_path: '["value"]["formatted"]'
+          type: string
+        keep_expanding_json_column: false
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

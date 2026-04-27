@@ -1,0 +1,171 @@
+---
+id: 427805
+name: LTVデータ - 閲覧用
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    gcs_uri: kimura-test2
+    gcs_uri_format: bucket
+    query: |-
+      SELECT
+        *,
+        -- 1. 平均客単価 (LTV / 購入回数)
+        SAFE_DIVIDE(total_ltv, total_orders) AS avg_order_value,
+
+        -- 2. 顧客ランク (LTV金額によるセグメント)
+        CASE
+          WHEN total_ltv >= 50000 THEN 'SS_VIP'
+          WHEN total_ltv >= 30000 THEN 'S_Gold'
+          WHEN total_ltv >= 10000 THEN 'A_Silver'
+          ELSE 'B_Bronze'
+        END AS customer_rank,
+
+        -- 3. 離脱リスク判定 (最終購入から90日以上経過)
+        CASE
+          WHEN DATE_DIFF(CURRENT_DATE(), EXTRACT(DATE FROM last_purchase_at), DAY) > 90 THEN '離脱懸念'
+          ELSE 'アクティブ'
+        END AS churn_risk,
+
+        -- 4. オムニチャネル判定
+        CASE
+          WHEN REGEXP_CONTAINS(used_channels, ',') THEN '複数チャネル利用'
+          ELSE '単一チャネル利用'
+        END AS channel_usage_type
+
+      FROM `systemn-playground.kimura_test.customer_ltv_summary`
+    location: asia-northeast1
+    temp_dataset: kimura_test
+    cleanup_gcs_files: true
+    use_legacy_sql: false
+    cache: true
+    file_format: CSV
+    bigquery_job_wait_second: 600
+    custom_variables: []
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: customer_key
+        type: string
+      - name: all_emails
+        type: string
+      - name: total_ltv
+        type: long
+      - name: total_orders
+        type: long
+      - name: first_purchase_at
+        type: timestamp
+        format: "%Y-%m-%d %H:%M:%S %z"
+      - name: last_purchase_at
+        type: timestamp
+        format: "%Y-%m-%d %H:%M:%S %z"
+      - name: ltv_last_12month
+        type: long
+      - name: used_channels
+        type: string
+      - name: months_since_first_order
+        type: long
+      - name: avg_order_value
+        type: double
+      - name: customer_rank
+        type: string
+      - name: churn_risk
+        type: string
+      - name: channel_usage_type
+        type: string
+      quote: "\""
+      escape: "\""
+    decoders:
+    - type: gzip
+  out:
+    type: google_spreadsheets_v4
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_id: 15Sy26pbY81AqnBz5MwMMzqOXP57BZJV35Qo3tZoFEHQ
+    worksheet_title: LTV分析
+    timezone: Asia/Tokyo
+    value_input_option: USER_ENTERED
+    mode: replace
+    sorts: []
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: customer_key
+      src: customer_key
+      default: ''
+      type: string
+    - name: all_emails
+      src: all_emails
+      default: ''
+      type: string
+    - name: total_ltv
+      src: total_ltv
+      default: ''
+      type: long
+    - name: total_orders
+      src: total_orders
+      default: ''
+      type: long
+    - name: first_purchase_at
+      src: first_purchase_at
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d %H:%M:%S %z"
+    - name: last_purchase_at
+      src: last_purchase_at
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d %H:%M:%S %z"
+    - name: ltv_last_12month
+      src: ltv_last_12month
+      default: ''
+      type: long
+    - name: used_channels
+      src: used_channels
+      default: ''
+      type: string
+    - name: months_since_first_order
+      src: months_since_first_order
+      default: ''
+      type: long
+    - name: avg_order_value
+      src: avg_order_value
+      default: ''
+      type: double
+    - name: customer_rank
+      src: customer_rank
+      default: ''
+      type: string
+    - name: churn_risk
+      src: churn_risk
+      default: ''
+      type: string
+    - name: channel_usage_type
+      src: channel_usage_type
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

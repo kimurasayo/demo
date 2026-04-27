@@ -1,0 +1,85 @@
+---
+id: 395187
+name: date range error の検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: postgresql
+    postgresql_connection:
+      id: 81
+      name: csdemo-PostgreSQL
+    schema: public
+    database: postgres
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    default_timezone: UTC
+    column_options:
+    query: |-
+      SELECT
+          id,
+          order_name,
+        --   CASE
+        -- WHEN tyumon_ukesyo_kakunin_date < '0001-01-01' THEN NULL
+        -- ELSE
+        tyumon_ukesyo_kakunin_date
+      -- END AS tyumon_ukesyo_kakunin_date
+
+      FROM date_range_test
+    custom_variables: []
+    incremental_loading_enabled: false
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: 1110_date
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options:
+    - name: tyumon_ukesyo_kakunin_date
+      type: DATE
+      mode: NULLABLE
+      timezone: Etc/UTC
+      description: ''
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: order_name
+      src: order_name
+      default: ''
+      type: string
+    - name: tyumon_ukesyo_kakunin_date
+      src: tyumon_ukesyo_kakunin_date
+      default: ''
+      type: string
+    row_filters:
+      condition: and
+      conditions:
+      - column: id
+        operator: "=="
+        argument: '8'
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

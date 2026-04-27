@@ -1,0 +1,32 @@
+---
+id: 83238
+name: Highのレコードを通知する
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: insert
+  query: SELECT * FROM kimura_test.tasks_test where priority = "High"
+  destination_dataset: kimura_test
+  destination_table: tasks_priority_high
+  write_disposition: truncate
+  custom_variables:
+  - type: string
+    name: "$priority_high_id$"
+    value: id
+  - type: string
+    name: "$priority_high_title$"
+    value: title
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications:
+- type: complete
+  notify_when: finished
+  slack_destination:
+    id: 991
+    channel: kimura-test-3
+  message: "【優先度：高】のタスク情報\r\nタスクID：$priority_high_id$\r\nタスク名：$priority_high_title$\r\n"

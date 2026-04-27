@@ -1,0 +1,111 @@
+---
+id: 417567
+name: カラム名とテーブル名が同一ではない検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: '260128'
+    path_match_pattern: ''
+    decompression_type: guess
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    incremental_loading_enabled: false
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: true
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: Id
+        type: string
+      - name: Name
+        type: string
+      - name: CreatedDate
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S%z"
+      - name: KyujinKoukoku__c
+        type: string
+      - name: Deleteflag__c_CHANGED
+        type: long
+      - name: CreatedDate_CHANGED
+        type: long
+      quote: "\""
+      escape: "\""
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: KyujinKoukoku__c_test
+    auto_create_dataset: false
+    mode: merge
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    merge_keys:
+    - Id
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: Id
+      src: Id
+      default: ''
+      type: string
+    - name: Name
+      src: Name
+      default: ''
+      type: string
+    - name: CreatedDate
+      src: CreatedDate
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S%z"
+    - name: KyujinKoukoku__c
+      src: KyujinKoukoku__c
+      default: ''
+      type: string
+    - name: Deleteflag__c_CHANGED
+      src: Deleteflag__c_CHANGED
+      default: ''
+      type: long
+    - name: CreatedDate_CHANGED
+      src: CreatedDate_CHANGED
+      default: ''
+      type: long
+    - name: Add_column
+      src: ''
+      default: test
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

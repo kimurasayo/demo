@@ -1,0 +1,86 @@
+---
+id: 405572
+name: help docs
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: github_graphql
+    github_connection:
+      id: 63
+      name: help docs
+    query: |-
+      query GetDirectoryContentsWithDetails {
+        repository(owner: "primenumber-dev", name: "trocco-help-document") {
+          object(expression: "release:docs_public/trocco/ja/$path$") {
+            ... on Tree {
+              entries {
+                name
+                path
+                oid
+                object {
+                  ... on Blob {
+                    text
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    result_json_path: "$.data.repository.object.entries"
+    pagination: false
+    custom_variables:
+    - type: string
+      name: "$path$"
+      value: 03_etl-elt/01_connection-configurations
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: 1217_help_docs
+    auto_create_dataset: false
+    mode: merge
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    merge_keys:
+    - oid
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: records
+      src: records
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: path
+          json_path: '["path"]'
+          type: string
+        - name: text
+          json_path: '["object"]["text"]'
+          type: string
+        - name: oid
+          json_path: '["oid"]'
+          type: string
+        - name: name
+          json_path: '["name"]'
+          type: string
+        keep_expanding_json_column: false
+  is_runnable_concurrently: true
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

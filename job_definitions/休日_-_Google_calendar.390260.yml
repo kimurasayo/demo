@@ -1,0 +1,191 @@
+---
+id: 390260
+name: 休日 - Google calendar
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: http
+    url: https://www.googleapis.com/calendar/v3/calendars/ja.japanese.official%23holiday@group.v.calendar.google.com/events
+    method: GET
+    user_agent: ''
+    charset: UTF-8
+    open_timeout: 2000
+    read_timeout: 10000
+    max_retries: 5
+    retry_interval: 10000
+    request_interval: 0
+    input_direct: true
+    success_codes:
+    - '200'
+    http_connection:
+      id: 187
+      name: テスト
+    params:
+    - name: timeMin
+      value: "$today$T00:00:00+0900"
+    - name: timeMax
+      value: "$today$T23:59:59+0900"
+    custom_variables:
+    - type: timestamp
+      name: "$today$"
+      quantity: 0
+      unit: date
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y-%m-%d"
+    parser:
+      type: jsonpath
+      root: "$.items[*]"
+      default_timezone: UTC
+      columns:
+      - name: kind
+        type: string
+      - name: etag
+        type: json
+      - name: id
+        type: string
+      - name: status
+        type: string
+      - name: htmlLink
+        type: string
+      - name: created
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: updated
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: summary
+        type: string
+      - name: description
+        type: string
+      - name: creator
+        type: json
+      - name: organizer
+        type: json
+      - name: start
+        type: json
+      - name: end
+        type: json
+      - name: transparency
+        type: string
+      - name: visibility
+        type: string
+      - name: iCalUID
+        type: string
+      - name: sequence
+        type: long
+      - name: eventType
+        type: string
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: holiday_check
+    auto_create_dataset: false
+    mode: replace
+    location: EU
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: kind
+      src: kind
+      default: ''
+      type: string
+    - name: etag
+      src: etag
+      default: ''
+      type: json
+    - name: id
+      src: id
+      default: ''
+      type: string
+    - name: status
+      src: status
+      default: ''
+      type: string
+    - name: htmlLink
+      src: htmlLink
+      default: ''
+      type: string
+    - name: created
+      src: created
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: updated
+      src: updated
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: summary
+      src: summary
+      default: ''
+      type: string
+    - name: description
+      src: description
+      default: ''
+      type: string
+    - name: creator
+      src: creator
+      default: ''
+      type: json
+    - name: organizer
+      src: organizer
+      default: ''
+      type: json
+    - name: start
+      src: start
+      default: ''
+      type: json
+    - name: end
+      src: end
+      default: ''
+      type: json
+    - name: transparency
+      src: transparency
+      default: ''
+      type: string
+    - name: visibility
+      src: visibility
+      default: ''
+      type: string
+    - name: iCalUID
+      src: iCalUID
+      default: ''
+      type: string
+    - name: sequence
+      src: sequence
+      default: ''
+      type: long
+    - name: eventType
+      src: eventType
+      default: ''
+      type: string
+    row_filters:
+      condition: and
+      conditions:
+      - column: description
+        operator: "=="
+        argument: 祝日
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,82 @@
+---
+id: 427238
+name: 会員情報のマスターを取得
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: mysql
+    mysql_connection:
+      id: 281
+      name: csdemo-CloudMySQL
+    database: test
+    query: SELECT * FROM member_master
+    default_timezone: ''
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    use_legacy_datetime_code: false
+    custom_variables: []
+    incremental_loading_enabled: false
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: member_master
+    auto_create_dataset: false
+    mode: merge
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    merge_keys:
+    - member_id
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: member_id
+      src: member_id
+      default: ''
+      type: string
+    - name: full_name
+      src: full_name
+      default: ''
+      type: string
+    - name: tel
+      src: tel
+      default: ''
+      type: string
+    - name: email
+      src: email
+      default: ''
+      type: string
+    - name: birthday
+      src: birthday
+      default: ''
+      type: timestamp
+      format: ''
+    - name: created_at
+      src: created_at
+      default: ''
+      type: timestamp
+      format: ''
+    - name: updated_at
+      src: updated_at
+      default: ''
+      type: timestamp
+      format: ''
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

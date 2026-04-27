@@ -1,0 +1,52 @@
+---
+id: 397064
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: snowflake
+    snowflake_connection:
+      id: 63
+      name: csdemo-Snowflake_keypair
+    database: TEST_BY_KIMURA
+    schema: PUBLIC
+    warehouse: COMPUTE_WH
+    query: |-
+      SELECT ID,
+      TO_VARCHAR(EVENT_DATE)
+      AS EVENT_DATE FROM SAMPLE_DATE
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    custom_variables: []
+  out:
+    type: google_spreadsheets_v4
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_id: 1wMnmTi0A56QaMPJJGAjkUkGriB5-QcfvaGOfyFjs4L8
+    worksheet_title: シート1
+    timezone: Asia/Tokyo
+    value_input_option: USER_ENTERED
+    mode: replace
+    sorts: []
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: ID
+      src: ID
+      default: ''
+      type: long
+    - name: EVENT_DATE
+      src: EVENT_DATE
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,23 @@
+---
+id: 72516
+name: 文字列カスタム変数検証
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: insert
+  query: select "$rpa_robot_execute_id$"
+  destination_dataset: kimura_test
+  destination_table: '0715'
+  write_disposition: truncate
+  custom_variables:
+  - type: string
+    name: "$rpa_robot_execute_id$"
+    value: データマート
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications: []

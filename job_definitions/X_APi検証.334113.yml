@@ -1,0 +1,68 @@
+---
+id: 334113
+name: X APi検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: http
+    url: https://api.twitter.com/2/users/by/username/sayo_saru
+    method: GET
+    user_agent: ''
+    charset: UTF-8
+    open_timeout: 2000
+    read_timeout: 10000
+    max_retries: 5
+    retry_interval: 10000
+    request_interval: 0
+    input_direct: true
+    success_codes:
+    - '200'
+    request_headers:
+      Authorization: "*****"
+    params: []
+    custom_variables: []
+    parser:
+      type: jsonl
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      newline: LF
+      charset: UTF-8
+      min_rows_for_guess: 1
+      columns:
+      - name: data
+        type: json
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '0424'
+    auto_create_dataset: false
+    mode: append
+    location: US
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: data
+      src: data
+      default: ''
+      type: json
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

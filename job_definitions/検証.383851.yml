@@ -1,0 +1,221 @@
+---
+id: 383851
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: custom_connector
+    custom_connector_connection:
+      id: 60
+      name: Stripe検証
+    url: https://api.stripe.com/v1
+    auth_type: api_key
+    auth_header_name: Authorization
+    endpoint_path: "/invoices/in_1Qqle0RJl0rUAQDR8zulwqem/lines"
+    endpoint_method: GET
+    success_codes: '200'
+    not_retryable_codes: '400,401,403,404'
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$.data"
+      default_timezone: UTC
+      columns:
+      - name: period
+        type: json
+      - name: unit_amount_excluding_tax
+        type: long
+      - name: type
+        type: string
+      - name: taxes
+        type: json
+      - name: tax_rates
+        type: json
+      - name: tax_amounts
+        type: json
+      - name: subscription
+        type: string
+      - name: quantity
+        type: long
+      - name: proration_details
+        type: json
+      - name: proration
+        type: boolean
+      - name: pricing
+        type: json
+      - name: price
+        type: json
+      - name: pretax_credit_amounts
+        type: json
+      - name: plan
+        type: string
+      - name: id
+        type: string
+      - name: parent
+        type: json
+      - name: metadata
+        type: json
+      - name: livemode
+        type: boolean
+      - name: invoice_item
+        type: string
+      - name: invoice
+        type: string
+      - name: discounts
+        type: json
+      - name: discountable
+        type: boolean
+      - name: discount_amounts
+        type: json
+      - name: description
+        type: string
+      - name: currency
+        type: string
+      - name: amount_excluding_tax
+        type: long
+      - name: amount
+        type: long
+      - name: object
+        type: string
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '0925'
+    auto_create_dataset: false
+    mode: append
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: string
+    - name: object
+      src: object
+      default: ''
+      type: string
+    - name: amount
+      src: amount
+      default: ''
+      type: long
+    - name: amount_excluding_tax
+      src: amount_excluding_tax
+      default: ''
+      type: long
+    - name: currency
+      src: currency
+      default: ''
+      type: string
+    - name: description
+      src: description
+      default: ''
+      type: string
+    - name: discount_amounts
+      src: discount_amounts
+      default: ''
+      type: json
+    - name: discountable
+      src: discountable
+      default: ''
+      type: boolean
+    - name: discounts
+      src: discounts
+      default: ''
+      type: json
+    - name: invoice
+      src: invoice
+      default: ''
+      type: string
+    - name: invoice_item
+      src: invoice_item
+      default: ''
+      type: string
+    - name: livemode
+      src: livemode
+      default: ''
+      type: boolean
+    - name: metadata
+      src: metadata
+      default: ''
+      type: json
+    - name: parent
+      src: parent
+      default: ''
+      type: json
+    - name: period
+      src: period
+      default: ''
+      type: json
+    - name: plan
+      src: plan
+      default: ''
+      type: string
+    - name: pretax_credit_amounts
+      src: pretax_credit_amounts
+      default: ''
+      type: json
+    - name: price
+      src: price
+      default: ''
+      type: json
+    - name: pricing
+      src: pricing
+      default: ''
+      type: json
+    - name: proration
+      src: proration
+      default: ''
+      type: boolean
+    - name: proration_details
+      src: proration_details
+      default: ''
+      type: json
+    - name: quantity
+      src: quantity
+      default: ''
+      type: long
+    - name: subscription
+      src: subscription
+      default: ''
+      type: string
+    - name: tax_amounts
+      src: tax_amounts
+      default: ''
+      type: json
+    - name: tax_rates
+      src: tax_rates
+      default: ''
+      type: json
+    - name: taxes
+      src: taxes
+      default: ''
+      type: json
+    - name: type
+      src: type
+      default: ''
+      type: string
+    - name: unit_amount_excluding_tax
+      src: unit_amount_excluding_tax
+      default: ''
+      type: long
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

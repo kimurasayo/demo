@@ -1,0 +1,201 @@
+---
+id: 352869
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: google_drive
+    google_drive_connection:
+      id: 325
+      name: csdemo-GoogleDrive-kimura
+    folder_id: 1uwrFP5N2n9_a9yGaWmF8HN6MNjCN6_tv
+    file_match_pattern: nyuka_jisseki_20250620181312.csv
+    decompression_type:
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: CRLF
+      charset: MS932
+      columns:
+      - name: 入荷予定日
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: 入荷実績日
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: 品番
+        type: string
+      - name: 品名
+        type: string
+      - name: 入荷予定数
+        type: long
+      - name: 入荷実績数
+        type: long
+      - name: 仕入先
+        type: string
+      - name: 注文番号
+        type: string
+      - name: 発注日
+        type: string
+      - name: 備考
+        type: string
+      - name: ロット
+        type: string
+      - name: 消費期限
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: バーコード
+        type: long
+      - name: 在庫区分
+        type: string
+      quote: "\""
+      escape: "\""
+      null_string: ''
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '0623'
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options:
+    - name: 転送時間_ja_string
+      type: TIMESTAMP
+      mode: NULLABLE
+      timezone: Asia/Tokyo
+      description: ''
+    - name: 転送日時_utc_string
+      type: TIMESTAMP
+      mode: NULLABLE
+      timezone: Asia/Tokyo
+      description: ''
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables:
+    - type: timestamp
+      name: "$date_ja$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y-%m-%d %H:%M:%S"
+    - type: timestamp
+      name: "$date_utc$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Etc/UTC
+      format: "%Y-%m-%d %H:%M:%S"
+  data_settings:
+    columns:
+    - name: 入荷予定日
+      src: 入荷予定日
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: 入荷実績日
+      src: 入荷実績日
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: 品番
+      src: 品番
+      default: ''
+      type: string
+    - name: 品名
+      src: 品名
+      default: ''
+      type: string
+    - name: 入荷予定数
+      src: 入荷予定数
+      default: ''
+      type: long
+    - name: 入荷実績数
+      src: 入荷実績数
+      default: ''
+      type: long
+    - name: 仕入先
+      src: 仕入先
+      default: ''
+      type: string
+    - name: 注文番号
+      src: 注文番号
+      default: ''
+      type: string
+    - name: 発注日
+      src: 発注日
+      default: ''
+      type: string
+    - name: 備考
+      src: 備考
+      default: ''
+      type: string
+    - name: ロット
+      src: ロット
+      default: ''
+      type: string
+    - name: 消費期限
+      src: 消費期限
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: バーコード
+      src: バーコード
+      default: ''
+      type: long
+    - name: 在庫区分
+      src: 在庫区分
+      default: ''
+      type: string
+    - name: 転送時間_ja_string
+      src: ''
+      default: "$date_ja$"
+      type: string
+    - name: 転送日時_ja_timestamp
+      src: ''
+      default: "$date_ja$"
+      type: timestamp
+      format: "%Y-%m-%d %H:%M:%S"
+    - name: 転送日時_utc_string
+      src: ''
+      default: "$date_utc$"
+      type: string
+    - name: 転送日時_utc_timestamp
+      src: ''
+      default: "$date_utc$"
+      type: timestamp
+      format: "%Y-%m-%d %H:%M:%S"
+    transfered_time_column:
+      column_name: time
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []
