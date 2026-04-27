@@ -1,0 +1,92 @@
+---
+id: 437297
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    gcs_uri: kimura-sample
+    gcs_uri_format: bucket
+    query: SELECT * FROM `systemn-playground.kimura_test.kimura_citext`
+    location: asia-northeast1
+    temp_dataset: kimura_test
+    cleanup_gcs_files: true
+    use_legacy_sql: false
+    cache: true
+    file_format: NEWLINE_DELIMITED_JSON
+    bigquery_job_wait_second: 600
+    custom_variables: []
+    parser:
+      type: jsonl
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      newline: LF
+      charset: UTF-8
+      min_rows_for_guess: 1
+      columns:
+      - name: id
+        type: long
+      - name: username
+        type: string
+      - name: email
+        type: string
+      - name: bio
+        type: string
+      - name: mac
+        type: string
+    decoders:
+    - type: gzip
+  out:
+    type: snowflake
+    snowflake_connection:
+      id: 63
+      name: csdemo-Snowflake_keypair
+    warehouse: COMPUTE_WH
+    database: TEST_BY_KIMURA
+    schema: PUBLIC
+    table: TEST_0416
+    retry_limit: 12
+    retry_wait: 1000
+    max_retry_wait: 1800000
+    mode: replace
+    default_timezone: UTC
+    column_options:
+    empty_field_as_null: true
+    batch_size: 50
+    delete_stage_on_error: false
+    escape_with_enclosing: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: username
+      src: username
+      default: ''
+      type: string
+    - name: email
+      src: email
+      default: ''
+      type: string
+    - name: bio
+      src: bio
+      default: ''
+      type: string
+    - name: mac
+      src: mac
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

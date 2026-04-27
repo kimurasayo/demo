@@ -1,0 +1,101 @@
+---
+id: 392965
+name: 通知テスト
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: google_spreadsheets
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_url: https://docs.google.com/spreadsheets/d/1JV07h0Bn4WB-BZHvIg0N9dYVYmo010EHdLoGP4AvvtI/edit?gid=895362509#gid=895362509
+    worksheet_title: name
+    start_row: 2
+    start_column: A
+    default_timezone: Asia/Tokyo
+    null_string: ''
+    columns:
+    - name: name
+      type: string
+    - name: age
+      type: long
+    - name: email
+      type: string
+    - name: 日付
+      type: timestamp
+      format: "%Y年%m月%d日"
+    custom_variables:
+    - type: timestamp
+      name: "$date$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Etc/UTC
+      format: "%Y-%m-%d"
+    - type: string
+      name: "$id$"
+      value: '1'
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: alart_test
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: name
+      src: name
+      default: ''
+      type: string
+    - name: age
+      src: age
+      default: ''
+      type: long
+    - name: email
+      src: email
+      default: ''
+      type: string
+    - name: date
+      src: 日付
+      default: ''
+      type: timestamp
+      format: ''
+    - name: que_date
+      src: ''
+      default: "$date$"
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: id
+      src: ''
+      default: "$id$"
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications:
+- type: complete
+  notify_when: finished
+  slack_destination:
+    id: 991
+    channel: kimura-test-3
+  message: "$date$\r\n$id$"

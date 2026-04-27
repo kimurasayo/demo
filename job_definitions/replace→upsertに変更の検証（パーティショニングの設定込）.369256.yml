@@ -1,0 +1,103 @@
+---
+id: 369256
+name: replace→upsertに変更の検証（パーティショニングの設定込）
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: mysql
+    mysql_connection:
+      id: 281
+      name: csdemo-CloudMySQL
+    database: test
+    query: select DISTINCT * from fukazawa_test_user_2
+    default_timezone: ''
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    use_legacy_datetime_code: false
+    custom_variables: []
+    incremental_loading_enabled: false
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_us_test
+    table: '20250801'
+    auto_create_dataset: false
+    mode: merge
+    location: US
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    partitioning_type: ingestion_time
+    time_partitioning:
+      type: HOUR
+    clustering_fields:
+      fields:
+      - name
+      - id
+    merge_keys:
+    - id
+    - name
+    - email
+    - birthday
+    - add_data
+    - cost
+    - data
+    - date
+    - updated_at
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: name
+      src: name
+      default: ''
+      type: string
+    - name: email
+      src: email
+      default: ''
+      type: string
+    - name: birthday
+      src: birthday
+      default: ''
+      type: string
+    - name: cost
+      src: cost
+      default: ''
+      type: string
+    - name: data
+      src: data
+      default: ''
+      type: string
+    - name: date
+      src: date
+      default: ''
+      type: string
+    - name: add_data
+      src: add_data
+      default: ''
+      type: string
+    - name: updated_at
+      src: updated_at
+      default: ''
+      type: timestamp
+      format: ''
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

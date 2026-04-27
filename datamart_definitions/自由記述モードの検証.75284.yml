@@ -1,0 +1,24 @@
+---
+id: 75284
+name: 自由記述モードの検証
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: query
+  query: |-
+    INSERT INTO
+      `systemn-playground.cs_onbording.kimura_work` (name, age, date)
+    VALUES
+      ("Alice", 28, DATE "2025-08-20"),
+      ("Bob", 35, DATE "2025-08-21"),
+      ("Charlie", 42, DATE "2025-08-22");
+  location: asia-northeast1
+  custom_variables: []
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,37 @@
+---
+id: 73982
+name: 配列の検証
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: insert
+  query: |-
+    SELECT
+      id,
+      genre_id,
+      genre_operation_id,
+      tainyu_salary,
+      shop_salary,
+      priority,
+      date,
+      ARRAY(
+        SELECT CAST(x AS INT64)
+        FROM UNNEST(SPLIT(REGEXP_REPLACE(special_generations, r'^\[|\]$', ''), ',')) AS x
+      ) AS special_generations,
+      ARRAY(
+        SELECT CAST(x AS INT64)
+        FROM UNNEST(SPLIT(REGEXP_REPLACE(treatment, r'^\[|\]$', ''), ',')) AS x
+      ) AS treatment
+    FROM kimura_us_test.250807;
+  destination_dataset: kimura_us_test
+  destination_table: new_table_name
+  write_disposition: append
+  custom_variables: []
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,98 @@
+---
+id: 441610
+name: jsonl検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: jsonl_0422.jsonl
+    custom_variables: []
+    parser:
+      type: jsonl
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      newline: LF
+      charset: UTF-8
+      min_rows_for_guess: 1
+      columns:
+      - name: marketoGUID
+        type: string
+      - name: leadId
+        type: long
+      - name: activityDate
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S%z"
+      - name: activityTypeId
+        type: long
+      - name: campaignId
+        type: long
+      - name: primaryAttributeValueId
+        type: long
+      - name: primaryAttributeValue
+        type: string
+      - name: attributes
+        type: json
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: 0422_jsonl
+    auto_create_dataset: false
+    mode: append
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: marketoGUID
+      src: marketoGUID
+      default: ''
+      type: string
+    - name: leadId
+      src: leadId
+      default: ''
+      type: long
+    - name: activityDate
+      src: activityDate
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S%z"
+    - name: activityTypeId
+      src: activityTypeId
+      default: ''
+      type: long
+    - name: campaignId
+      src: campaignId
+      default: ''
+      type: long
+    - name: primaryAttributeValueId
+      src: primaryAttributeValueId
+      default: ''
+      type: long
+    - name: primaryAttributeValue
+      src: primaryAttributeValue
+      default: ''
+      type: string
+    - name: attributes
+      src: attributes
+      default: ''
+      type: json
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

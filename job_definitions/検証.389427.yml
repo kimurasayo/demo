@@ -1,0 +1,172 @@
+---
+id: 389427
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: Apple_202501.txt
+    custom_variables: []
+    parser:
+      type: csv
+      delimiter: "\t"
+      skip_header_lines: 4
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: true
+      allow_extra_columns: true
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: false
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: CRLF
+      columns:
+      - name: Transaction Date
+        type: string
+      - name: Settlement Date
+        type: string
+      - name: Apple Identifier
+        type: long
+      - name: SKU
+        type: string
+      - name: Title
+        type: string
+      - name: Developer Name
+        type: string
+      - name: Product Type Identifier
+        type: string
+      - name: Country of Sale
+        type: string
+      - name: Quantity
+        type: long
+      - name: Partner Share
+        type: double
+      - name: Extended Partner Share
+        type: double
+      - name: Partner Share Currency
+        type: string
+      - name: Customer Price
+        type: double
+      - name: Customer Currency
+        type: string
+      - name: Sale or Return
+        type: string
+      - name: Promo Code
+        type: string
+      - name: Order Type
+        type: string
+      - name: Region
+        type: string
+      quote: "\""
+      escape: "\\"
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '1016'
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: Transaction Date
+      src: Transaction Date
+      default: ''
+      type: string
+    - name: Settlement Date
+      src: Settlement Date
+      default: ''
+      type: string
+    - name: Apple Identifier
+      src: Apple Identifier
+      default: ''
+      type: long
+    - name: SKU
+      src: SKU
+      default: ''
+      type: string
+    - name: Title
+      src: Title
+      default: ''
+      type: string
+    - name: Developer Name
+      src: Developer Name
+      default: ''
+      type: string
+    - name: Product Type Identifier
+      src: Product Type Identifier
+      default: ''
+      type: string
+    - name: Country of Sale
+      src: Country of Sale
+      default: ''
+      type: string
+    - name: Quantity
+      src: Quantity
+      default: ''
+      type: long
+    - name: Partner Share
+      src: Partner Share
+      default: ''
+      type: double
+    - name: Extended Partner Share
+      src: Extended Partner Share
+      default: ''
+      type: double
+    - name: Partner Share Currency
+      src: Partner Share Currency
+      default: ''
+      type: string
+    - name: Customer Price
+      src: Customer Price
+      default: ''
+      type: double
+    - name: Customer Currency
+      src: Customer Currency
+      default: ''
+      type: string
+    - name: Sale or Return
+      src: Sale or Return
+      default: ''
+      type: string
+    - name: Promo Code
+      src: Promo Code
+      default: ''
+      type: string
+    - name: Order Type
+      src: Order Type
+      default: ''
+      type: string
+    - name: Region
+      src: Region
+      default: ''
+      type: string
+    row_filters:
+      condition: and
+      conditions:
+      - column: Transaction Date
+        operator: include
+        argument: "/"
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

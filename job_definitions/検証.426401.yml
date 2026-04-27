@@ -1,0 +1,267 @@
+---
+id: 426401
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: Production/08_BAKUP/POS/2026-02-19/
+    path_match_pattern: "\\.csv"
+    decompression_type: guess
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    incremental_loading_enabled: false
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: shop_id
+        type: long
+      - name: shop_hash_id
+        type: string
+      - name: shop_name
+        type: string
+      - name: shop
+        type: string
+      - name: agency
+        type: string
+      - name: brand
+        type: string
+      - name: company
+        type: string
+      - name: is_outlier_lower_shop
+        type: long
+      - name: is_for_promotion
+        type: long
+      - name: agency_id
+        type: long
+      - name: brand_id
+        type: long
+      - name: company_id
+        type: long
+      - name: occupation_category
+        type: string
+      - name: job_published_date_first
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: job_published_date_last
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: work_start_date_first
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: work_start_date_last
+        type: timestamp
+        format: "%Y-%m-%d"
+      - name: estimated_prefecture
+        type: string
+      - name: estimated_age_range
+        type: string
+      - name: estimated_occupation
+        type: string
+      - name: estimated_sex
+        type: string
+      - name: follow_uu
+        type: long
+      - name: keep_uu
+        type: long
+      - name: application_uu
+        type: long
+      - name: application_uu_follow
+        type: long
+      - name: application_uu_keep
+        type: long
+      - name: application_uu_no_follow_and_keep
+        type: long
+      - name: application_count
+        type: long
+      - name: application_count_follow
+        type: long
+      - name: application_count_keep
+        type: long
+      - name: application_count_no_follow_and_keep
+        type: long
+      - name: application_job_count
+        type: long
+      quote: "\""
+      escape: "\""
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '0302'
+    auto_create_dataset: false
+    mode: append
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: shop_id
+      src: shop_id
+      default: ''
+      type: long
+    - name: shop_hash_id
+      src: shop_hash_id
+      default: ''
+      type: string
+    - name: shop_name
+      src: shop_name
+      default: ''
+      type: string
+    - name: shop
+      src: shop
+      default: ''
+      type: string
+    - name: agency
+      src: agency
+      default: ''
+      type: string
+    - name: brand
+      src: brand
+      default: ''
+      type: string
+    - name: company
+      src: company
+      default: ''
+      type: string
+    - name: is_outlier_lower_shop
+      src: is_outlier_lower_shop
+      default: ''
+      type: long
+    - name: is_for_promotion
+      src: is_for_promotion
+      default: ''
+      type: long
+    - name: agency_id
+      src: agency_id
+      default: ''
+      type: long
+    - name: brand_id
+      src: brand_id
+      default: ''
+      type: long
+    - name: company_id
+      src: company_id
+      default: ''
+      type: long
+    - name: occupation_category
+      src: occupation_category
+      default: ''
+      type: string
+    - name: job_published_date_first
+      src: job_published_date_first
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: job_published_date_last
+      src: job_published_date_last
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: work_start_date_first
+      src: work_start_date_first
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: work_start_date_last
+      src: work_start_date_last
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: estimated_prefecture
+      src: estimated_prefecture
+      default: ''
+      type: string
+    - name: estimated_age_range
+      src: estimated_age_range
+      default: ''
+      type: string
+    - name: estimated_occupation
+      src: estimated_occupation
+      default: ''
+      type: string
+    - name: estimated_sex
+      src: estimated_sex
+      default: ''
+      type: string
+    - name: follow_uu
+      src: follow_uu
+      default: ''
+      type: long
+    - name: keep_uu
+      src: keep_uu
+      default: ''
+      type: long
+    - name: application_uu
+      src: application_uu
+      default: ''
+      type: long
+    - name: application_uu_follow
+      src: application_uu_follow
+      default: ''
+      type: long
+    - name: application_uu_keep
+      src: application_uu_keep
+      default: ''
+      type: long
+    - name: application_uu_no_follow_and_keep
+      src: application_uu_no_follow_and_keep
+      default: ''
+      type: long
+    - name: application_count
+      src: application_count
+      default: ''
+      type: long
+    - name: application_count_follow
+      src: application_count_follow
+      default: ''
+      type: long
+    - name: application_count_keep
+      src: application_count_keep
+      default: ''
+      type: long
+    - name: application_count_no_follow_and_keep
+      src: application_count_no_follow_and_keep
+      default: ''
+      type: long
+    - name: application_job_count
+      src: application_job_count
+      default: ''
+      type: long
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,127 @@
+---
+id: 395953
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: JSONFEED (1).txt
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$[*]"
+      default_timezone: UTC
+      columns:
+      - name: id
+        type: string
+      - name: first_publish_date
+        type: timestamp
+        format: "%Y/%m/%d %H:%M:%S"
+      - name: first_publish_date_of_week
+        type: long
+      - name: published
+        type: long
+      - name: headline
+        type: string
+      - name: primary_section
+        type: string
+      - name: sections
+        type: json
+      - name: distributor_category
+        type: string
+      - name: content_restriction_code
+        type: string
+      - name: distributor_name
+        type: string
+      - name: distributor_owner_name
+        type: string
+      - name: credits_by
+        type: json
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '1113'
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: string
+    - name: first_publish_date
+      src: first_publish_date
+      default: ''
+      type: timestamp
+      format: "%Y/%m/%d %H:%M:%S"
+    - name: first_publish_date_of_week
+      src: first_publish_date_of_week
+      default: ''
+      type: long
+    - name: published
+      src: published
+      default: ''
+      type: long
+    - name: headline
+      src: headline
+      default: ''
+      type: string
+    - name: primary_section
+      src: primary_section
+      default: ''
+      type: string
+    - name: sections
+      src: sections
+      default: ''
+      type: json
+    - name: distributor_category
+      src: distributor_category
+      default: ''
+      type: string
+    - name: content_restriction_code
+      src: content_restriction_code
+      default: ''
+      type: string
+    - name: distributor_name
+      src: distributor_name
+      default: ''
+      type: string
+    - name: distributor_owner_name
+      src: distributor_owner_name
+      default: ''
+      type: string
+    - name: credits_by
+      src: credits_by
+      default: ''
+      type: json
+    row_filters:
+      condition: and
+      conditions:
+      - column: distributor_owner_name
+        operator: "=="
+        argument: ''
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,398 @@
+---
+id: 417857
+name: プログラミングETL検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: soql_file
+    salesforce_connection:
+      id: 150
+      name: csdemo-Salesforce
+    object: Account
+    object_acquisition_method: soql
+    api_version: '54.0'
+    transfer_mode: type_interfence
+    include_deleted_or_archived_records: false
+    soql: |-
+      SELECT
+        Id,
+        IsDeleted,
+        MasterRecordId,
+        Name,
+        Type,
+        ParentId,
+        Phone,
+        Fax,
+        AccountNumber,
+        Website,
+        PhotoUrl,
+        Sic,
+        Industry,
+        AnnualRevenue,
+        NumberOfEmployees,
+        Ownership,
+        TickerSymbol,
+        Description,
+        Rating,
+        Site,
+        OwnerId,
+        CreatedDate,
+        CreatedById,
+        LastModifiedDate,
+        LastModifiedById,
+        SystemModstamp,
+        LastActivityDate,
+        LastViewedDate,
+        LastReferencedDate,
+        BillingStreet,
+        BillingCity,
+        BillingState
+      FROM Account
+    custom_variables:
+    - type: timestamp
+      name: "$LINKED_AT$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Etc/UTC
+      format: "%Y-%m-%dT%H:%M:%S.%LZ"
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: Id
+        type: string
+      - name: IsDeleted
+        type: boolean
+      - name: MasterRecordId
+        type: string
+      - name: Name
+        type: string
+      - name: Type
+        type: string
+      - name: ParentId
+        type: string
+      - name: Phone
+        type: string
+      - name: Fax
+        type: string
+      - name: AccountNumber
+        type: string
+      - name: Website
+        type: string
+      - name: PhotoUrl
+        type: string
+      - name: Sic
+        type: long
+      - name: Industry
+        type: string
+      - name: AnnualRevenue
+        type: double
+      - name: NumberOfEmployees
+        type: long
+      - name: Ownership
+        type: string
+      - name: TickerSymbol
+        type: string
+      - name: Description
+        type: string
+      - name: Rating
+        type: string
+      - name: Site
+        type: string
+      - name: OwnerId
+        type: string
+      - name: CreatedDate
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: CreatedById
+        type: string
+      - name: LastModifiedDate
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: LastModifiedById
+        type: string
+      - name: SystemModstamp
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S.%L%z"
+      - name: LastActivityDate
+        type: string
+      - name: LastViewedDate
+        type: string
+      - name: LastReferencedDate
+        type: string
+      - name: BillingStreet
+        type: string
+      - name: BillingCity
+        type: string
+      - name: BillingState
+        type: string
+      quote: "\""
+      escape: "\""
+  out:
+    type: snowflake
+    snowflake_connection:
+      id: 63
+      name: csdemo-Snowflake_keypair
+    warehouse: COMPUTE_WH
+    database: TEST_BY_KIMURA
+    schema: PUBLIC
+    table: PRO_TEST
+    retry_limit: 12
+    retry_wait: 1000
+    max_retry_wait: 1800000
+    mode: replace
+    default_timezone: UTC
+    column_options:
+    empty_field_as_null: true
+    batch_size: 50
+    delete_stage_on_error: false
+    escape_with_enclosing: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: Id
+      src: Id
+      default: ''
+      type: string
+    - name: IsDeleted
+      src: IsDeleted
+      default: ''
+      type: boolean
+    - name: MasterRecordId
+      src: MasterRecordId
+      default: ''
+      type: string
+    - name: Name
+      src: Name
+      default: ''
+      type: string
+    - name: Type
+      src: Type
+      default: ''
+      type: string
+    - name: ParentId
+      src: ParentId
+      default: ''
+      type: string
+    - name: Phone
+      src: Phone
+      default: ''
+      type: string
+    - name: Fax
+      src: Fax
+      default: ''
+      type: string
+    - name: AccountNumber
+      src: AccountNumber
+      default: ''
+      type: string
+    - name: Website
+      src: Website
+      default: ''
+      type: string
+    - name: PhotoUrl
+      src: PhotoUrl
+      default: ''
+      type: string
+    - name: Sic
+      src: Sic
+      default: ''
+      type: long
+    - name: Industry
+      src: Industry
+      default: ''
+      type: string
+    - name: AnnualRevenue
+      src: AnnualRevenue
+      default: ''
+      type: double
+    - name: NumberOfEmployees
+      src: NumberOfEmployees
+      default: ''
+      type: long
+    - name: Ownership
+      src: Ownership
+      default: ''
+      type: string
+    - name: TickerSymbol
+      src: TickerSymbol
+      default: ''
+      type: string
+    - name: Description
+      src: Description
+      default: ''
+      type: string
+    - name: Rating
+      src: Rating
+      default: ''
+      type: string
+    - name: Site
+      src: Site
+      default: ''
+      type: string
+    - name: OwnerId
+      src: OwnerId
+      default: ''
+      type: string
+    - name: CreatedDate
+      src: CreatedDate
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: CreatedById
+      src: CreatedById
+      default: ''
+      type: string
+    - name: LastModifiedDate
+      src: LastModifiedDate
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: LastModifiedById
+      src: LastModifiedById
+      default: ''
+      type: string
+    - name: LastActivityDate
+      src: LastActivityDate
+      default: ''
+      type: string
+    - name: LastViewedDate
+      src: LastViewedDate
+      default: ''
+      type: string
+    - name: LastReferencedDate
+      src: LastReferencedDate
+      default: ''
+      type: string
+    - name: BillingStreet
+      src: BillingStreet
+      default: ''
+      type: string
+    - name: BillingCity
+      src: BillingCity
+      default: ''
+      type: string
+    - name: SAMPLE
+      src: ''
+      default: test
+      type: string
+    - name: SystemModstamp
+      src: SystemModstamp
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S.%L%z"
+    - name: SAMPLE2
+      src: ''
+      default: test
+      type: string
+    - name: BillingState
+      src: BillingState
+      default: ''
+      type: string
+    programming_etl:
+      image:
+        language: ruby
+        version: '2.7'
+      code: |-
+        class Etl < EtlBase
+          def transform_row(row)
+            # row["new_column"] = "trocco"
+            row
+          end
+
+          # def before_action
+          # end
+        end
+      columns:
+      - name: Id
+        type: string
+      - name: IsDeleted
+        type: boolean
+      - name: MasterRecordId
+        type: string
+      - name: Name
+        type: string
+      - name: Type
+        type: string
+      - name: ParentId
+        type: string
+      - name: Phone
+        type: string
+      - name: Fax
+        type: string
+      - name: AccountNumber
+        type: string
+      - name: Website
+        type: string
+      - name: PhotoUrl
+        type: string
+      - name: Sic
+        type: long
+      - name: Industry
+        type: string
+      - name: AnnualRevenue
+        type: long
+      - name: NumberOfEmployees
+        type: long
+      - name: Ownership
+        type: string
+      - name: TickerSymbol
+        type: string
+      - name: Description
+        type: string
+      - name: Rating
+        type: string
+      - name: Site
+        type: string
+      - name: OwnerId
+        type: string
+      - name: CreatedDate
+        type: timestamp
+        format: "%Y-%m-%d %H:%M:%S %z"
+      - name: CreatedById
+        type: string
+      - name: LastModifiedDate
+        type: timestamp
+        format: "%Y-%m-%d %H:%M:%S %z"
+      - name: LastModifiedById
+        type: string
+      - name: LastActivityDate
+        type: string
+      - name: LastViewedDate
+        type: string
+      - name: LastReferencedDate
+        type: string
+      - name: BillingStreet
+        type: string
+      - name: BillingCity
+        type: string
+      - name: SAMPLE
+        type: string
+      - name: SystemModstamp
+        type: timestamp
+        format: "%Y-%m-%d %H:%M:%S %z"
+      - name: SAMPLE2
+        type: string
+      - name: BillingState
+        type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

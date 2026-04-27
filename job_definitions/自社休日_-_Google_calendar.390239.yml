@@ -1,0 +1,83 @@
+---
+id: 390239
+name: 自社休日 - Google calendar
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: http
+    url: https://www.googleapis.com/calendar/v3/calendars/4944263acf547f5e349213bf0325828d270fb645ec284b2b208021553c0fa274@group.calendar.google.com/events
+    method: GET
+    user_agent: ''
+    charset: UTF-8
+    open_timeout: 2000
+    read_timeout: 10000
+    max_retries: 5
+    retry_interval: 10000
+    request_interval: 0
+    input_direct: true
+    success_codes:
+    - '200'
+    http_connection:
+      id: 187
+      name: テスト
+    params: []
+    custom_variables:
+    - type: timestamp
+      name: "$today$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y-%m-%d %H:%M:%S"
+    parser:
+      type: jsonpath
+      root: "$.items[*].start"
+      default_timezone: UTC
+      columns:
+      - name: date
+        type: timestamp
+        format: "%Y-%m-%d"
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: company_holiday_check
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: date
+      src: date
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+    row_filters:
+      condition: and
+      conditions:
+      - column: date
+        operator: "=="
+        argument: "$today$"
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,124 @@
+---
+id: 427191
+name: Shopifyの注文情報を取得する
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: shopify_graphql
+    shopify_graphql_connection:
+      id: 24
+      name: csdemo-Shopify
+    target: orders
+    created_at_min: ''
+    created_at_max: ''
+    updated_at_min: ''
+    updated_at_max: ''
+    processed_at_min: ''
+    processed_at_max: ''
+    order_status:
+    financial_status:
+    fulfillment_status:
+    include_staff_member_data: false
+    custom_variables:
+    - type: timestamp
+      name: "$start_date$"
+      quantity: 1
+      unit: date
+      direction: ago
+      time_zone: Etc/UTC
+      format: "%Y-%m-%d"
+    - type: timestamp
+      name: "$end_date$"
+      quantity: 0
+      unit: date
+      direction: ago
+      time_zone: Etc/UTC
+      format: "%Y-%m-%d"
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: shopify_order
+    auto_create_dataset: false
+    mode: merge
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    merge_keys:
+    - name
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: created_at
+      src: created_at
+      default: ''
+      type: timestamp
+      format: ''
+    - name: current_subtotal_price_set
+      src: current_subtotal_price_set
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: current_subtotal_price
+          json_path: '["presentment_money"]["amount"]'
+          type: long
+        keep_expanding_json_column: false
+    - name: current_total_price_set
+      src: current_total_price_set
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: current_total_price
+          json_path: '["presentment_money"]["amount"]'
+          type: string
+        keep_expanding_json_column: false
+    - name: email
+      src: email
+      default: ''
+      type: string
+    - name: name
+      src: name
+      default: ''
+      type: string
+    - name: phone
+      src: phone
+      default: ''
+      type: string
+    - name: taxes_included
+      src: taxes_included
+      default: ''
+      type: boolean
+    - name: total_tax_set
+      src: total_tax_set
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: total_tax
+          json_path: '["presentment_money"]["amount"]'
+          type: long
+        keep_expanding_json_column: false
+    - name: updated_at
+      src: updated_at
+      default: ''
+      type: timestamp
+      format: ''
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

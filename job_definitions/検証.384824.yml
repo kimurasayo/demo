@@ -1,0 +1,125 @@
+---
+id: 384824
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: kintone
+    kintone_connection:
+      id: 579
+      name: kintone kimura
+    app_id: '222'
+    fields:
+    - name: "$id"
+      type: long
+    - name: "$revision"
+      type: long
+    - name: カテゴリー
+      type: string
+    - name: ステータス
+      type: string
+    - name: レコード番号
+      type: long
+    - name: 作成日時
+      type: timestamp
+    - name: 作成者
+      type: string
+    - name: 作業者
+      type: string
+    - name: 文字列__1行_
+      type: string
+    - name: 日付
+      type: string
+    - name: 更新日時
+      type: timestamp
+    - name: 更新者
+      type: string
+    - name: 顧客ID
+      type: string
+    guest_space_id: ''
+    query: ''
+    expand_subtable: true
+    custom_variables: []
+  out:
+    type: google_spreadsheets_v4
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_id: 1JV07h0Bn4WB-BZHvIg0N9dYVYmo010EHdLoGP4AvvtI
+    worksheet_title: kintone
+    timezone: Asia/Tokyo
+    value_input_option: USER_ENTERED
+    mode: append
+    sorts: []
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: "$id"
+      src: "$id"
+      default: ''
+      type: long
+    - name: "$revision"
+      src: "$revision"
+      default: ''
+      type: long
+    - name: カテゴリー
+      src: カテゴリー
+      default: ''
+      type: string
+    - name: ステータス
+      src: ステータス
+      default: ''
+      type: string
+    - name: レコード番号
+      src: レコード番号
+      default: ''
+      type: long
+    - name: 作成日時
+      src: 作成日時
+      default: ''
+      type: timestamp
+      format: ''
+    - name: 作成者
+      src: 作成者
+      default: ''
+      type: string
+    - name: 作業者
+      src: 作業者
+      default: ''
+      type: string
+    - name: 文字列__1行_
+      src: 文字列__1行_
+      default: ''
+      type: string
+    - name: 日付
+      src: 日付
+      default: ''
+      type: string
+    - name: 更新日時
+      src: 更新日時
+      default: ''
+      type: timestamp
+      format: ''
+    - name: 更新者
+      src: 更新者
+      default: ''
+      type: string
+    - name: 顧客ID
+      src: 顧客ID
+      default: ''
+      type: string
+    row_filters:
+      condition: and
+      conditions:
+      - column: 作成者
+        operator: ">"
+        argument: wsdrf
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

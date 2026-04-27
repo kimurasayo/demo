@@ -1,0 +1,21 @@
+---
+id: 82248
+name: 検証
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: insert
+  query: SELECT SUM(timestamp_diff(finished_at, started_at, SECOND)) AS diff_second
+    FROM systemn-playground.kimura_test.251118
+  destination_dataset: kimura_test
+  destination_table: 251118_dm
+  write_disposition: truncate
+  custom_variables: []
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications: []

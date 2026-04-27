@@ -1,0 +1,95 @@
+---
+id: 397658
+name: フィールドタイプの検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: google_spreadsheets
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_url: https://docs.google.com/spreadsheets/d/1JV07h0Bn4WB-BZHvIg0N9dYVYmo010EHdLoGP4AvvtI/edit?gid=0#gid=0
+    worksheet_title: kintone
+    start_row: 2
+    start_column: A
+    default_timezone: Asia/Tokyo
+    null_string: ''
+    columns:
+    - name: 文字列_1行_2
+      type: string
+    - name: ラジオボタン
+      type: string
+    - name: ドロップダウン
+      type: string
+    - name: ドロップダウン_1
+      type: string
+    - name: チェックボックス
+      type: string
+    - name: テーブル.文字列_1行
+      type: string
+    - name: テーブル.ドロップダウン_0
+      type: string
+    - name: チェックボックス_0
+      type: string
+    custom_variables: []
+  out:
+    type: kintone
+    kintone_connection:
+      id: 579
+      name: kintone kimura
+    app_id: '397'
+    mode: upsert
+    update_key: 文字列_1行_2
+    ignore_nulls: false
+    reduce_key: 文字列_1行_2
+    chunk_size: 100
+    column_options:
+      チェックボックス:
+        field_code: チェックボックス
+        type: CHECK_BOX
+      チェックボックス_0:
+        field_code: チェックボックス_0
+        type: CHECK_BOX
+  data_settings:
+    columns:
+    - name: 文字列_1行_2
+      src: 文字列_1行_2
+      default: ''
+      type: string
+    - name: ラジオボタン
+      src: ラジオボタン
+      default: ''
+      type: string
+    - name: ドロップダウン
+      src: ドロップダウン
+      default: ''
+      type: string
+    - name: ドロップダウン_1
+      src: ドロップダウン_1
+      default: ''
+      type: string
+    - name: チェックボックス
+      src: チェックボックス
+      default: ''
+      type: string
+    - name: テーブル.文字列_1行
+      src: テーブル.文字列_1行
+      default: ''
+      type: string
+    - name: テーブル.ドロップダウン_0
+      src: テーブル.ドロップダウン_0
+      default: ''
+      type: string
+    - name: チェックボックス_0
+      src: チェックボックス_0
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,104 @@
+---
+id: 441752
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: google_drive
+    google_drive_connection:
+      id: 325
+      name: csdemo-GoogleDrive-kimura
+    folder_id: 1L3YyNmxcXQuUxubhbtfN1qzX4qaiBXUk
+    file_match_pattern: "^test_ja_.*\\.csv"
+    decompression_type:
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: ID
+        type: long
+      - name: NAME
+        type: string
+      - name: EMAIL
+        type: string
+      - name: TEL
+        type: string
+      - name: DEP
+        type: string
+      - name: DATE
+        type: timestamp
+        format: "%Y/%m/%d"
+      quote: "\""
+      escape: "\""
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '260423'
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: ID
+      src: ID
+      default: ''
+      type: long
+    - name: NAME
+      src: NAME
+      default: ''
+      type: string
+    - name: EMAIL
+      src: EMAIL
+      default: ''
+      type: string
+    - name: TEL
+      src: TEL
+      default: ''
+      type: string
+    - name: DEP
+      src: DEP
+      default: ''
+      type: string
+    - name: DATE
+      src: DATE
+      default: ''
+      type: timestamp
+      format: "%Y/%m/%d"
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,92 @@
+---
+id: 91675
+name: LTV集計マート
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: insert
+  query: |-
+    WITH
+    -- 1. Shopifyデータの整形
+    shopify_raw AS (
+      SELECT
+        LOWER(email) AS email,
+        REGEXP_REPLACE(phone, r'[^0-9]', '') AS tel_clean,
+        current_subtotal_price AS amount,
+        created_at AS order_at,
+        'Shopify' AS channel
+      FROM `systemn-playground.kimura_test.shopify_order`
+    ),
+
+    -- 2. 楽天データの整形（税込から税抜を計算）
+    rakuten_raw AS (
+      SELECT
+        LOWER(emailAddress) AS email,
+        CONCAT(phoneNumber1, phoneNumber2, phoneNumber3) AS tel_clean,
+        FLOOR(totalprice / (1 + taxRate)) AS amount,
+        OrderDatetime AS order_at,
+        'Rakuten' AS channel
+      FROM `systemn-playground.kimura_test.rakuten_order`
+    ),
+
+    -- 3. 店舗データの整形（会員マスターと紐付け）
+    store_raw AS (
+      SELECT
+        LOWER(m.email) AS email,
+        REGEXP_REPLACE(m.tel, r'[^0-9]', '') AS tel_clean,
+        s.amount_excl_tax AS amount,
+        s.purchase_at AS order_at,
+        'Store' AS channel
+      FROM `systemn-playground.kimura_test.offline_sales` s
+      LEFT JOIN `systemn-playground.kimura_test.member_master` m ON s.member_id = m.member_id
+    ),
+
+    -- 4. 全チャネルの統合（Union）
+    all_union AS (
+      SELECT * FROM shopify_raw UNION ALL
+      SELECT * FROM rakuten_raw UNION ALL
+      SELECT * FROM store_raw
+    ),
+
+    -- 5. 最終集計：顧客ごとのLTVと属性算出
+    final_ltv AS (
+      SELECT
+        -- 電話番号(tel_clean)を第一のキーにする
+        -- もし電話番号もなければメールアドレスをキーにする
+        COALESCE(tel_clean, email) AS customer_key,
+        -- 重複を除いて、カンマ区切りで全てのメールアドレスを結合する
+        STRING_AGG(DISTINCT email, ', ') AS all_emails,
+        SUM(amount) AS total_ltv,                -- 全期間LTV
+        COUNT(*) AS total_orders,               -- 累計購入回数
+        MIN(order_at) AS first_purchase_at,     -- 初回購入日
+        MAX(order_at) AS last_purchase_at,      -- 最終購入日
+        -- 直近1年間のLTV（2026年3月現在を基準に計算）
+        SUM(CASE WHEN order_at >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 365 DAY) THEN amount ELSE 0 END) AS ltv_last_12month,
+        STRING_AGG(DISTINCT channel, ', ') AS used_channels
+      FROM all_union
+      GROUP BY 1
+      -- メールも電話番号もないレコード（名寄せ不可）を除外
+      HAVING customer_key IS NOT NULL
+    )
+
+    SELECT
+      *,
+      -- 継続月数の計算
+      DATE_DIFF(EXTRACT(DATE FROM last_purchase_at), EXTRACT(DATE FROM first_purchase_at), MONTH) AS months_since_first_order
+    FROM final_ltv
+    ORDER BY total_ltv DESC
+  destination_dataset: kimura_test
+  destination_table: customer_ltv_summary
+  write_disposition: truncate
+  clustering_fields: []
+  custom_variables: []
+  quality_check_setting:
+    enabled: false
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications: []

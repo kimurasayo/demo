@@ -1,0 +1,136 @@
+---
+id: 392913
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: out_raw_data_sample.csv
+    custom_variables: []
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: id
+        type: long
+      - name: name
+        type: string
+      - name: region
+        type: string
+      - name: date
+        type: timestamp
+        format: "%Y/%m/%d"
+      - name: value1
+        type: long
+      - name: value2
+        type: long
+      - name: colG
+        type: string
+      - name: colH
+        type: string
+      - name: colI
+        type: string
+      - name: colJ
+        type: string
+      - name: colK
+        type: string
+      - name: category
+        type: string
+      - name: flag
+        type: boolean
+      - name: score
+        type: long
+      quote: "\""
+      escape: "\""
+    decoders: []
+  out:
+    type: google_spreadsheets_v4
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_id: 1JV07h0Bn4WB-BZHvIg0N9dYVYmo010EHdLoGP4AvvtI
+    worksheet_title: out_raw_data_sample
+    timezone: Asia/Tokyo
+    value_input_option: USER_ENTERED
+    mode: replace
+    sorts: []
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: name
+      src: name
+      default: ''
+      type: string
+    - name: region
+      src: region
+      default: ''
+      type: string
+    - name: date
+      src: date
+      default: ''
+      type: timestamp
+      format: "%Y/%m/%d"
+    - name: value1
+      src: value1
+      default: ''
+      type: long
+    - name: value2
+      src: value2
+      default: ''
+      type: long
+    - name: colG
+      src: colG
+      default: ''
+      type: string
+    - name: colH
+      src: colH
+      default: ''
+      type: string
+    - name: colI
+      src: colI
+      default: ''
+      type: string
+    - name: colJ
+      src: colJ
+      default: ''
+      type: string
+    - name: colK
+      src: colK
+      default: ''
+      type: string
+    - name: category
+      src: category
+      default: ''
+      type: string
+    - name: flag
+      src: flag
+      default: ''
+      type: boolean
+    - name: score
+      src: score
+      default: ''
+      type: long
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

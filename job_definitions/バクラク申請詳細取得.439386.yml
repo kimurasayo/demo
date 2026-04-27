@@ -1,0 +1,141 @@
+---
+id: 439386
+name: バクラク申請詳細取得
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: bakuraku
+    bakuraku_connection:
+      id: 123
+      name: バクラク検証用アカウント
+    path: rest/v1/workflow/requests/path_parameter__id
+    path_parameter__id: "$id$"
+    custom_variables:
+    - type: string
+      name: "$id$"
+      value: 01JNMTW02NX6W83V4DNTAGQ97R
+    - type: timestamp
+      name: "$yesterday$"
+      quantity: 1
+      unit: date
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y-%m-%d"
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: bakuraku_details
+    auto_create_dataset: false
+    mode: merge
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    merge_keys:
+    - id
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: string
+    - name: num
+      src: num
+      default: ''
+      type: long
+    - name: openedAt
+      src: openedAt
+      default: ''
+      type: timestamp
+      format: ''
+    - name: approvedAt
+      src: approvedAt
+      default: ''
+      type: timestamp
+      format: ''
+    - name: title
+      src: title
+      default: ''
+      type: string
+    - name: status
+      src: status
+      default: ''
+      type: string
+    - name: proxyRequestUser
+      src: proxyRequestUser
+      default: ''
+      type: json
+    - name: requestUserGroup
+      src: requestUserGroup
+      default: ''
+      type: json
+    - name: requestUser
+      src: requestUser
+      default: ''
+      type: json
+    - name: newClientValue
+      src: newClientValue
+      default: ''
+      type: json
+    - name: requestToPurchaseRelations
+      src: requestToPurchaseRelations
+      default: ''
+      type: json
+    - name: defaultFieldValue
+      src: defaultFieldValue
+      default: ''
+      type: json
+    - name: requestStepSets
+      src: requestStepSets
+      default: ''
+      type: json
+    - name: requestDetails
+      src: requestDetails
+      default: ''
+      type: json
+    - name: form
+      src: form
+      default: ''
+      type: json
+    - name: formFieldValues
+      src: formFieldValues
+      default: ''
+      type: json
+    - name: paymentDigestibility
+      src: paymentDigestibility
+      default: ''
+      type: json
+    - name: purchaseToRequestRelations
+      src: purchaseToRequestRelations
+      default: ''
+      type: json
+    - name: relatedRequests
+      src: relatedRequests
+      default: ''
+      type: json
+    - name: requestStepComments
+      src: requestStepComments
+      default: ''
+      type: json
+    - name: userUploadFiles
+      src: userUploadFiles
+      default: ''
+      type: json
+  is_runnable_concurrently: true
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

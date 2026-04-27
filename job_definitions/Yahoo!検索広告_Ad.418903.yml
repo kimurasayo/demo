@@ -1,0 +1,98 @@
+---
+id: 418903
+name: Yahoo!検索広告 Ad
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: yahoo_ads_api_yss
+    yahoo_ads_api_connection:
+      id: 118
+      name: csdemo-YahooAdsAPI
+    base_account_id: '877045'
+    account_id: '877045'
+    service: report_definition_service
+    report_type: AD
+    start_date: "$from$"
+    end_date: "$to$"
+    columns:
+    - name: ACCOUNT_ID
+      type: long
+    - name: ACCOUNT_NAME
+      type: string
+    - name: CAMPAIGN_ID
+      type: long
+    - name: CAMPAIGN_NAME
+      type: string
+    - name: ADGROUP_ID
+      type: long
+    - name: ADGROUP_NAME
+      type: string
+    - name: AD_ID
+      type: long
+    - name: AD_NAME
+      type: string
+    - name: AD_TYPE
+      type: string
+    - name: DEVICE_PREFERENCE
+      type: string
+    - name: DAY
+      type: timestamp
+      format: "%Y-%m-%d"
+    - name: DEVICE
+      type: string
+    - name: IMPS
+      type: long
+    - name: CLICKS
+      type: long
+    - name: CLICK_RATE
+      type: double
+    - name: COST
+      type: long
+    - name: AVG_CPC
+      type: double
+    filters:
+    custom_variables:
+    - type: timestamp
+      name: "$from$"
+      quantity: 1
+      unit: month
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y%m%d"
+    - type: timestamp
+      name: "$to$"
+      quantity: 0
+      unit: month
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y%m%d"
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: '0101'
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

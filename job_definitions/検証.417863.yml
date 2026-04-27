@@ -1,0 +1,63 @@
+---
+id: 417863
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: oracle
+    oracle_connection:
+      id: 30
+      name: csdemo-Oracle-AWSRDS
+    database: ORCL
+    connection_type: sid
+    query: |-
+      SELECT
+        ID,
+        CASE
+          WHEN EXTRACT(YEAR FROM DT) < 1000 THEN
+            TO_DATE(
+              LPAD(EXTRACT(YEAR FROM DT) + 1000, 4, '0')
+              || TO_CHAR(DT, '-MM-DD HH24:MI:SS'),
+              'YYYY-MM-DD HH24:MI:SS'
+            )
+          ELSE DT
+        END AS DT
+      FROM KIMURA_DATE_TEST;
+    custom_variables: []
+    incremental_loading_enabled: false
+  out:
+    type: postgresql
+    postgresql_connection:
+      id: 81
+      name: csdemo-PostgreSQL
+    database: postgres
+    schema: public
+    table: kimura_oracle
+    retry_limit: 12
+    retry_wait: 1000
+    max_retry_wait: 1800000
+    default_timezone: UTC
+    mode: replace
+    merge_keys:
+    after_load: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: ID
+      src: ID
+      default: ''
+      type: double
+    - name: DT
+      src: DT
+      default: ''
+      type: timestamp
+      format: ''
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

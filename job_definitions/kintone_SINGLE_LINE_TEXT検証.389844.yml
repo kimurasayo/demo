@@ -1,0 +1,54 @@
+---
+id: 389844
+name: kintone SINGLE_LINE_TEXT検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: google_spreadsheets
+    google_spreadsheets_connection:
+      id: 1123
+      name: kimura-GoogleSpreadsheets
+    spreadsheets_url: https://docs.google.com/spreadsheets/d/1JV07h0Bn4WB-BZHvIg0N9dYVYmo010EHdLoGP4AvvtI/edit?gid=536860506#gid=536860506
+    worksheet_title: 検証2
+    start_row: 2
+    start_column: A
+    default_timezone: Asia/Tokyo
+    null_string: ''
+    columns:
+    - name: 氏名
+      type: string
+    - name: 住所
+      type: string
+    custom_variables: []
+  out:
+    type: kintone
+    kintone_connection:
+      id: 579
+      name: kintone kimura
+    app_id: '276'
+    mode: insert
+    ignore_nulls: false
+    chunk_size: 100
+    column_options:
+      single:
+        field_code: single
+        type: SINGLE_LINE_TEXT
+  data_settings:
+    columns:
+    - name: single
+      src: 氏名
+      default: ''
+      type: string
+    - name: multi
+      src: 住所
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,24 @@
+---
+id: 79350
+name: LISTの検証
+description: ''
+datamart:
+  type: snowflake
+  snowflake_connection_id: 63
+  query_mode: query
+  warehouse: COMPUTE_WH
+  query: |-
+    LIST @TEST_BY_KIMURA.PUBLIC.my_stage;
+    -->
+
+    CREATE OR REPLACE TABLE TEST_BY_KIMURA.PUBLIC.my_json_table AS
+      METADATA$FILENAME AS filename
+  statement_timeout: 43200
+  custom_variables: []
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications: []

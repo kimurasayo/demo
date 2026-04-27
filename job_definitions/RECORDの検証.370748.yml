@@ -1,0 +1,111 @@
+---
+id: 370748
+name: RECORDの検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: '0807_test.json'
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$.[*]"
+      default_timezone: UTC
+      columns:
+      - name: id
+        type: long
+      - name: genre_id
+        type: long
+      - name: genre_operation_id
+        type: long
+      - name: tainyu_salary
+        type: long
+      - name: shop_salary
+        type: long
+      - name: special_generations
+        type: json
+      - name: priority
+        type: long
+      - name: treatment
+        type: json
+      - name: date
+        type: timestamp
+        format: "%Y-%m-%d"
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_us_test
+    table: '250807'
+    auto_create_dataset: false
+    mode: replace
+    location: US
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options:
+    - name: special_generations
+      type: RECORD
+      mode: REPEATED
+      description: ''
+    - name: treatment
+      type: RECORD
+      mode: REPEATED
+      description: ''
+    template_table: new_table_name
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: genre_id
+      src: genre_id
+      default: ''
+      type: long
+    - name: genre_operation_id
+      src: genre_operation_id
+      default: ''
+      type: long
+    - name: tainyu_salary
+      src: tainyu_salary
+      default: ''
+      type: long
+    - name: shop_salary
+      src: shop_salary
+      default: ''
+      type: long
+    - name: special_generations
+      src: special_generations
+      default: ''
+      type: json
+    - name: priority
+      src: priority
+      default: ''
+      type: long
+    - name: treatment
+      src: treatment
+      default: ''
+      type: json
+    - name: date
+      src: date
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%d"
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

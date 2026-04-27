@@ -1,0 +1,307 @@
+---
+id: 385403
+name: zendesk support 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: custom_connector
+    custom_connector_connection:
+      id: 67
+      name: zendesk OAuth
+    url: https://primenumber.zendesk.com/api/v2
+    auth_type: oauth2
+    auth_header_name: Authorization
+    auth_header_scheme: Bearer
+    endpoint_path: "/tickets"
+    endpoint_method: GET
+    success_codes: '200'
+    not_retryable_codes: '400,401,403,404'
+    paginator_setting:
+      pagination_strategy:
+        type: page_increment
+        start_from_page: 1
+        total_pages: "$.content.count / 100"
+      page_token_option:
+        field_name: page
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$.tickets"
+      default_timezone: UTC
+      columns:
+      - name: sharing_agreement_ids
+        type: json
+      - name: email_cc_ids
+        type: json
+      - name: forum_topic_id
+        type: string
+      - name: problem_id
+        type: string
+      - name: has_incidents
+        type: boolean
+      - name: is_public
+        type: boolean
+      - name: due_at
+        type: string
+      - name: tags
+        type: json
+      - name: custom_fields
+        type: json
+      - name: satisfaction_rating
+        type: json
+      - name: follower_ids
+        type: json
+      - name: custom_status_id
+        type: long
+      - name: encoded_id
+        type: string
+      - name: fields
+        type: json
+      - name: followup_ids
+        type: json
+      - name: ticket_form_id
+        type: long
+      - name: brand_id
+        type: long
+      - name: allow_channelback
+        type: boolean
+      - name: allow_attachments
+        type: boolean
+      - name: from_messaging_channel
+        type: boolean
+      - name: description
+        type: string
+      - name: id
+        type: long
+      - name: external_id
+        type: string
+      - name: via
+        type: json
+      - name: created_at
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S%z"
+      - name: updated_at
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S%z"
+      - name: generated_timestamp
+        type: long
+      - name: type
+        type: string
+      - name: subject
+        type: string
+      - name: raw_subject
+        type: string
+      - name: url
+        type: string
+      - name: priority
+        type: string
+      - name: status
+        type: string
+      - name: recipient
+        type: string
+      - name: requester_id
+        type: long
+      - name: submitter_id
+        type: long
+      - name: assignee_id
+        type: long
+      - name: organization_id
+        type: long
+      - name: group_id
+        type: long
+      - name: collaborator_ids
+        type: json
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: zendesk_1001
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: url
+      src: url
+      default: ''
+      type: string
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: external_id
+      src: external_id
+      default: ''
+      type: string
+    - name: via
+      src: via
+      default: ''
+      type: json
+    - name: created_at
+      src: created_at
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S%z"
+    - name: updated_at
+      src: updated_at
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S%z"
+    - name: generated_timestamp
+      src: generated_timestamp
+      default: ''
+      type: long
+    - name: type
+      src: type
+      default: ''
+      type: string
+    - name: subject
+      src: subject
+      default: ''
+      type: string
+    - name: raw_subject
+      src: raw_subject
+      default: ''
+      type: string
+    - name: description
+      src: description
+      default: ''
+      type: string
+    - name: priority
+      src: priority
+      default: ''
+      type: string
+    - name: status
+      src: status
+      default: ''
+      type: string
+    - name: recipient
+      src: recipient
+      default: ''
+      type: string
+    - name: requester_id
+      src: requester_id
+      default: ''
+      type: long
+    - name: submitter_id
+      src: submitter_id
+      default: ''
+      type: long
+    - name: assignee_id
+      src: assignee_id
+      default: ''
+      type: long
+    - name: organization_id
+      src: organization_id
+      default: ''
+      type: long
+    - name: group_id
+      src: group_id
+      default: ''
+      type: long
+    - name: collaborator_ids
+      src: collaborator_ids
+      default: ''
+      type: json
+    - name: follower_ids
+      src: follower_ids
+      default: ''
+      type: json
+    - name: email_cc_ids
+      src: email_cc_ids
+      default: ''
+      type: json
+    - name: forum_topic_id
+      src: forum_topic_id
+      default: ''
+      type: string
+    - name: problem_id
+      src: problem_id
+      default: ''
+      type: string
+    - name: has_incidents
+      src: has_incidents
+      default: ''
+      type: boolean
+    - name: is_public
+      src: is_public
+      default: ''
+      type: boolean
+    - name: due_at
+      src: due_at
+      default: ''
+      type: string
+    - name: tags
+      src: tags
+      default: ''
+      type: json
+    - name: custom_fields
+      src: custom_fields
+      default: ''
+      type: json
+    - name: satisfaction_rating
+      src: satisfaction_rating
+      default: ''
+      type: json
+    - name: sharing_agreement_ids
+      src: sharing_agreement_ids
+      default: ''
+      type: json
+    - name: custom_status_id
+      src: custom_status_id
+      default: ''
+      type: long
+    - name: encoded_id
+      src: encoded_id
+      default: ''
+      type: string
+    - name: fields
+      src: fields
+      default: ''
+      type: json
+    - name: followup_ids
+      src: followup_ids
+      default: ''
+      type: json
+    - name: ticket_form_id
+      src: ticket_form_id
+      default: ''
+      type: long
+    - name: brand_id
+      src: brand_id
+      default: ''
+      type: long
+    - name: allow_channelback
+      src: allow_channelback
+      default: ''
+      type: boolean
+    - name: allow_attachments
+      src: allow_attachments
+      default: ''
+      type: boolean
+    - name: from_messaging_channel
+      src: from_messaging_channel
+      default: ''
+      type: boolean
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

@@ -1,0 +1,75 @@
+---
+id: 438178
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: json0409_no.json
+    custom_variables: []
+    parser:
+      type: jsonpath
+      root: "$.results.rows"
+      default_timezone: UTC
+      columns:
+      - name: wh_pu__purchase_requisitions_organization_name
+        type: json
+      - name: wh_pu__purchase_requisitions_purchase_requisition_cnt
+        type: json
+    decoders: []
+  out:
+    type: box
+    box_connection:
+      id: 19
+      name: csdemo-Box
+    folder_path: "/trocco-cs-demo/kimura_test"
+    file_name: 260409.csv
+    custom_variables: []
+    formatter:
+      type: csv
+      delimiter: ","
+      newline: CRLF
+      newline_in_field: LF
+      charset: UTF-8
+      quote_policy: MINIMAL
+      quote: "\""
+      escape: "\\"
+      header_line: true
+      default_timezone: UTC
+  data_settings:
+    columns:
+    - name: wh_pu__purchase_requisitions_organization_name
+      src: wh_pu__purchase_requisitions_organization_name
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: wh_pu__purchase_requisitions_organization_name__value__raw
+          json_path: '["value"]["raw"]'
+          type: string
+        - name: wh_pu__purchase_requisitions_organization_name__value__formatted
+          json_path: '["value"]["formatted"]'
+          type: string
+        keep_expanding_json_column: false
+    - name: wh_pu__purchase_requisitions_purchase_requisition_cnt
+      src: wh_pu__purchase_requisitions_purchase_requisition_cnt
+      default: ''
+      type: json
+      expand_json:
+        expanded_columns:
+        - name: wh_pu__purchase_requisitions_purchase_requisition_cnt__value__raw
+          json_path: '["value"]["raw"]'
+          type: long
+        - name: wh_pu__purchase_requisitions_purchase_requisition_cnt__value__formatted
+          json_path: '["value"]["formatted"]'
+          type: string
+        keep_expanding_json_column: false
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

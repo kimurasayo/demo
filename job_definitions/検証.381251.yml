@@ -1,0 +1,83 @@
+---
+id: 381251
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: mysql
+    mysql_connection:
+      id: 281
+      name: csdemo-CloudMySQL
+    database: test
+    query: select * from demo_customer
+    default_timezone: ''
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    use_legacy_datetime_code: false
+    custom_variables: []
+    incremental_loading_enabled: false
+  out:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: 1010/0912
+    file_ext: ".tsv"
+    acl: Private
+    suppress_output_files: true
+    sequence_format: "%03d.%02d"
+    multipart_upload_enabled: false
+    custom_variables: []
+    formatter:
+      type: csv
+      delimiter: ","
+      newline: CRLF
+      newline_in_field: LF
+      charset: UTF-8
+      quote_policy: MINIMAL
+      quote: "\""
+      escape: "\\"
+      header_line: true
+      default_timezone: UTC
+    encoders:
+  data_settings:
+    columns:
+    - name: id
+      src: id
+      default: ''
+      type: long
+    - name: name
+      src: name
+      default: ''
+      type: string
+    - name: mail
+      src: mail
+      default: ''
+      type: string
+    - name: birthday
+      src: birthday
+      default: ''
+      type: timestamp
+      format: ''
+    - name: rank
+      src: rank
+      default: ''
+      type: string
+    row_filters:
+      condition: and
+      conditions:
+      - column: id
+        operator: ">"
+        argument: '2'
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

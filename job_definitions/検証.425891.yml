@@ -1,0 +1,170 @@
+---
+id: 425891
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: '260227'
+    path_match_pattern: POSis_つゆ類_価格帯_4ヶ月.tsv
+    decompression_type: guess
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    incremental_loading_enabled: false
+    parser:
+      type: csv
+      delimiter: "\t"
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: CRLF
+      charset: UTF-8
+      columns:
+      - name: 2業態_code
+        type: string
+      - name: ヤマサエリア_code
+        type: string
+      - name: sku名称_code
+        type: string
+      - name: dummy4_code
+        type: string
+      - name: dummy5_code
+        type: string
+      - name: 2業態
+        type: string
+      - name: ヤマサエリア
+        type: string
+      - name: sku名称
+        type: string
+      - name: dummy4
+        type: string
+      - name: dummy5
+        type: string
+      - name: level
+        type: string
+      - name: sku_cd
+        type: string
+      - name: sku_seq
+        type: string
+      - name: term_type
+        type: string
+      - name: dimension
+        type: string
+      - name: 横％((日別換算)販売店率)
+        type: string
+      - name: ｱｲﾃﾑ販売店当り((日別換算)販売個数)
+        type: string
+      quote: "\""
+      escape: "\""
+    decoders: []
+  out:
+    type: snowflake
+    snowflake_connection:
+      id: 63
+      name: csdemo-Snowflake_keypair
+    warehouse: COMPUTE_WH
+    database: TEST_BY_KIMURA
+    schema: PUBLIC
+    table: POS
+    retry_limit: 12
+    retry_wait: 1000
+    max_retry_wait: 1800000
+    mode: replace
+    default_timezone: UTC
+    column_options:
+    empty_field_as_null: true
+    batch_size: 50
+    delete_stage_on_error: false
+    escape_with_enclosing: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: 2業態_code
+      src: 2業態_code
+      default: ''
+      type: string
+    - name: ヤマサエリア_code
+      src: ヤマサエリア_code
+      default: ''
+      type: string
+    - name: sku名称_code
+      src: sku名称_code
+      default: ''
+      type: string
+    - name: dummy4_code
+      src: dummy4_code
+      default: ''
+      type: string
+    - name: dummy5_code
+      src: dummy5_code
+      default: ''
+      type: string
+    - name: 2業態
+      src: 2業態
+      default: ''
+      type: string
+    - name: ヤマサエリア
+      src: ヤマサエリア
+      default: ''
+      type: string
+    - name: sku名称
+      src: sku名称
+      default: ''
+      type: string
+    - name: dummy4
+      src: dummy4
+      default: ''
+      type: string
+    - name: dummy5
+      src: dummy5
+      default: ''
+      type: string
+    - name: level
+      src: level
+      default: ''
+      type: string
+    - name: sku_cd
+      src: sku_cd
+      default: ''
+      type: string
+    - name: sku_seq
+      src: sku_seq
+      default: ''
+      type: string
+    - name: term_type
+      src: term_type
+      default: ''
+      type: string
+    - name: dimension
+      src: dimension
+      default: ''
+      type: string
+    - name: 横％((日別換算)販売店率)
+      src: 横％((日別換算)販売店率)
+      default: ''
+      type: string
+    - name: ｱｲﾃﾑ販売店当り((日別換算)販売個数)
+      src: ｱｲﾃﾑ販売店当り((日別換算)販売個数)
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

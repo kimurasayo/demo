@@ -1,0 +1,121 @@
+---
+id: 394867
+name: S3フォルダの検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: log_test/$year$/$month$/$day$/$hour$/
+    path_match_pattern: ''
+    decompression_type: guess
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables:
+    - type: timestamp
+      name: "$year$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%Y"
+    - type: timestamp
+      name: "$month$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%m"
+    - type: timestamp
+      name: "$day$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%d"
+    - type: timestamp
+      name: "$hour$"
+      quantity: 0
+      unit: hour
+      direction: ago
+      time_zone: Asia/Tokyo
+      format: "%H"
+    incremental_loading_enabled: false
+    parser:
+      type: jsonpath
+      root: "$"
+      default_timezone: UTC
+      columns:
+      - name: job_id
+        type: string
+      - name: status
+        type: string
+      - name: error
+        type: json
+      - name: timestamp
+        type: timestamp
+        format: "%Y-%m-%dT%H:%M:%S%:z"
+      - name: duration_seconds
+        type: long
+      - name: attempt
+        type: long
+    decoders: []
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: log_1106
+    auto_create_dataset: false
+    mode: append
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: job_id
+      src: job_id
+      default: ''
+      type: string
+    - name: status
+      src: status
+      default: ''
+      type: string
+    - name: error
+      src: error
+      default: ''
+      type: json
+    - name: timestamp
+      src: timestamp
+      default: ''
+      type: timestamp
+      format: "%Y-%m-%dT%H:%M:%S%:z"
+    - name: duration_seconds
+      src: duration_seconds
+      default: ''
+      type: long
+    - name: attempt
+      src: attempt
+      default: ''
+      type: long
+  is_runnable_concurrently: true
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

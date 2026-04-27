@@ -1,0 +1,92 @@
+---
+id: 369977
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: mysql
+    mysql_connection:
+      id: 281
+      name: csdemo-CloudMySQL
+    database: test
+    query: |-
+      -- （任意）完全に読取専用で開始：このトランザクション内では更新系を禁止し、副作用を避けます
+            START TRANSACTION READ ONLY;
+
+            -- 1) パラメータ設定
+            --    非推奨の「式中でのユーザ変数代入」を避けるため、SET で代入します。
+            SET @from = '1727708400';
+
+            -- 2) UNION 文の文字列が長くなる場合に備え、連結長をセッション単位で拡張します。
+            --   （数百テーブル規模なら 1MB 以上が安全。必要に応じて増やしてください）
+            SET SESSION group_concat_max_len = 1024 * 1024;  -- 1MB
+
+      SELECT * FROM test_acquired_on;
+
+           -- 4) 対象が 0 件（fm_status=1 が存在しない等）の場合でも構文エラーにしないフォールバックを入れます。
+            SET @union_body = IFNULL(
+              @union_body,
+              'SELECT NULL AS fl_code, NULL AS fl_time, NULL AS fl_data, NULL AS fm_name LIMIT 0'
+            );
+
+            -- 5) UNION 本文を外側で包み、最終的な並び順などを付与します。
+            --    - ここでは fl_time 昇順で返します。必要に応じて LIMIT なども追記してください。
+            SET @final_sql = CONCAT(
+              'SELECT u.fm_name,fl_data,if(dt_merge=0,u.fl_data,dt_merge) dt_merge_form, fl_code as conctact_cd, 0 as client_cd, from_unixtime(u.fl_time) as fl_time FROM (', @union_body, ') AS u ',
+              'left join lead_data on u.fl_data = dt_code'
+            );
+
+            -- -- [任意] デバッグ用：生成された最終 SQL を確認したいときは以下を有効化
+            -- SELECT @final_sql\G
+
+            -- 6) 動的 SQL を実行します。
+            --    PREPARE: 文字列をパースして実行可能なステートメントに変換
+            --    EXECUTE: 実行
+            --    DEALLOCATE: ステートメントを解放（セッションメモリをクリーンアップ）
+            PREPARE s FROM @final_sql;
+            EXECUTE s;
+            DEALLOCATE PREPARE s;
+
+            -- （任意）読取専用トランザクションを終了：結果だけ取得し、DB には何も残しません
+            ROLLBACK;
+    default_timezone: ''
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    use_legacy_datetime_code: false
+    custom_variables: []
+    incremental_loading_enabled: false
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_us_test
+    table: mysql_0805
+    auto_create_dataset: false
+    mode: replace
+    location: US
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options:
+    - name: acquired_on
+      type: DATE
+      mode: NULLABLE
+      description: ''
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

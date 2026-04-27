@@ -1,0 +1,92 @@
+---
+id: 387715
+name: 通知の検証_kimura_1128_test
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: mysql
+    mysql_connection:
+      id: 281
+      name: csdemo-CloudMySQL
+    database: test
+    table: kimura_1128_test_1
+    incremental_columns: []
+    default_timezone: Asia/Tokyo
+    fetch_rows: 10000
+    connect_timeout: 300
+    socket_timeout: 1800
+    use_legacy_datetime_code: false
+    custom_variables: []
+    incremental_loading_enabled: true
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: kimura_1128_test
+    auto_create_dataset: false
+    mode: replace
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    retain_column_descriptions: false
+    retain_column_policy_tags: false
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: job_id
+      src: job_id
+      default: ''
+      type: long
+    - name: job_url
+      src: job_url
+      default: ''
+      type: string
+    - name: job_definition_id
+      src: job_definition_id
+      default: ''
+      type: long
+    - name: job_definition_url
+      src: job_definition_url
+      default: ''
+      type: string
+    - name: job_definition_name
+      src: job_definition_name
+      default: ''
+      type: string
+    - name: executor_type
+      src: executor_type
+      default: ''
+      type: string
+    - name: status
+      src: status
+      default: ''
+      type: string
+    - name: transfer_records
+      src: transfer_records
+      default: ''
+      type: long
+    - name: transfer_bytes
+      src: transfer_bytes
+      default: ''
+      type: long
+    - name: skipped_records
+      src: skipped_records
+      default: ''
+      type: long
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

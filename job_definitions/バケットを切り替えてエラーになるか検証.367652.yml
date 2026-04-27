@@ -1,0 +1,110 @@
+---
+id: 367652
+name: バケットを切り替えてエラーになるか検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    gcs_uri: kimura-sample
+    gcs_uri_format: bucket
+    query: SELECT * FROM kimura_test.cook_book_string where `年齢` = 35
+    location: asia-northeast1
+    temp_dataset: kimura_test
+    cleanup_gcs_files: false
+    use_legacy_sql: false
+    cache: true
+    file_format: NEWLINE_DELIMITED_JSON
+    bigquery_job_wait_second: 600
+    custom_variables: []
+    parser:
+      type: jsonl
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      newline: LF
+      charset: UTF-8
+      min_rows_for_guess: 1
+      columns:
+      - name: 氏名
+        type: string
+      - name: 血液型
+        type: string
+      - name: 年齢
+        type: long
+      - name: メールアドレス
+        type: string
+      - name: 携帯電話番号
+        type: string
+      - name: 郵便番号
+        type: string
+      - name: 住所
+        type: string
+    decoders:
+    - type: gzip
+  out:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: 1210/0910
+    file_ext: ".csv"
+    acl: NOT_SET
+    suppress_output_files: true
+    sequence_format: ''
+    multipart_upload_enabled: false
+    custom_variables: []
+    formatter:
+      type: csv
+      delimiter: ","
+      newline: CRLF
+      newline_in_field: LF
+      charset: UTF-8
+      quote_policy: MINIMAL
+      quote: "\""
+      escape: "\\"
+      header_line: true
+      default_timezone: UTC
+    encoders:
+  data_settings:
+    columns:
+    - name: 氏名
+      src: 氏名
+      default: ''
+      type: string
+    - name: 血液型
+      src: 血液型
+      default: ''
+      type: string
+    - name: 年齢
+      src: 年齢
+      default: ''
+      type: long
+    - name: メールアドレス
+      src: メールアドレス
+      default: ''
+      type: string
+    - name: 携帯電話番号
+      src: 携帯電話番号
+      default: ''
+      type: string
+    - name: 郵便番号
+      src: 郵便番号
+      default: ''
+      type: string
+    - name: 住所
+      src: 住所
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

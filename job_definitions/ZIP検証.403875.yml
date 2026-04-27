@@ -1,0 +1,2532 @@
+---
+id: 403875
+name: ZIP検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: s3
+    s3_connection:
+      id: 668
+      name: csdemo-AmazonS3
+    region: ap-northeast-1
+    bucket: trocco-test-kimura
+    path_prefix: '251210'
+    path_match_pattern: FBK242_120_2_1_20251128.zip
+    decompression_type: zip
+    skip_header_line: false
+    stop_when_file_not_found: false
+    custom_variables: []
+    incremental_loading_enabled: false
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: CRLF
+      charset: MS932
+      columns:
+      - name: 状態区分
+        type: string
+      - name: 物件番号
+        type: string
+      - name: データ種類
+        type: string
+      - name: 物件種別
+        type: string
+      - name: 物件種目
+        type: string
+      - name: 会員番号
+        type: string
+      - name: 商号
+        type: string
+      - name: 商号（本支店名）
+        type: string
+      - name: 電話番号
+        type: string
+      - name: 問合せ担当者（１）
+        type: string
+      - name: 問合せ電話番号（１）
+        type: string
+      - name: Ｅメールアドレス（１）
+        type: string
+      - name: 問合せ担当者（２）
+        type: string
+      - name: 問合せ電話番号（２）
+        type: string
+      - name: Ｅメールアドレス（２）
+        type: string
+      - name: 取引主任者
+        type: string
+      - name: 免許コード
+        type: string
+      - name: 免許更新回数
+        type: string
+      - name: 支店名
+        type: string
+      - name: 郵便番号
+        type: string
+      - name: 所在地３－１
+        type: string
+      - name: 所在地３－２
+        type: string
+      - name: ＦＡＸ
+        type: string
+      - name: 商号のフォント
+        type: string
+      - name: 広告主の名称又は商号
+        type: string
+      - name: 広告主の事務所所在地
+        type: string
+      - name: 広告主の事務所電話番号
+        type: string
+      - name: 宅建業法による免許番号
+        type: string
+      - name: 図面
+        type: string
+      - name: 元物件番号
+        type: string
+      - name: 在庫月報送信フラグ
+        type: string
+      - name: 登録年月日
+        type: string
+        format: "%Y%m%d"
+      - name: 変更年月日
+        type: string
+        format: "%Y%m%d"
+      - name: 修正年月日
+        type: string
+      - name: 成約登録年月日
+        type: string
+      - name: 成約年月日
+        type: string
+        format: "%Y%m%d"
+      - name: 削除年月日
+        type: string
+      - name: 図面変更年月日
+        type: string
+      - name: 初回登録年月日
+        type: string
+      - name: 削除年月日(yymmddhhmmss）
+        type: string
+      - name: 図面変更年月日(yymmddhhmmss）
+        type: string
+      - name: 再登録年月日
+        type: string
+      - name: 日報掲載予定日
+        type: string
+      - name: 削除予定年月日
+        type: string
+      - name: アクセス年月日
+        type: string
+      - name: 取引条件の有効期限
+        type: string
+      - name: 特優賃区分
+        type: string
+      - name: 入力形態区分
+        type: string
+      - name: 所在地１
+        type: string
+      - name: 所在地２
+        type: string
+      - name: 都道府県名
+        type: string
+      - name: 所在地名１
+        type: string
+      - name: 所在地名２
+        type: string
+      - name: 所在地３
+        type: string
+      - name: 所在地３公開フラグ
+        type: string
+      - name: 建物名
+        type: string
+      - name: 経度
+        type: string
+      - name: 緯度
+        type: string
+      - name: 建物名公開フラグ
+        type: string
+      - name: 部屋番号
+        type: string
+      - name: 部屋番号公開フラグ
+        type: string
+      - name: その他所在地表示
+        type: string
+      - name: 棟番号
+        type: string
+      - name: 沿線（１）
+        type: string
+      - name: 沿線名（１）
+        type: string
+      - name: 駅（１）
+        type: string
+      - name: 駅名（１）
+        type: string
+      - name: 連絡駅コード（１）
+        type: string
+      - name: 徒歩（分）１（１）
+        type: string
+      - name: 徒歩（ｍ）２（１）
+        type: string
+      - name: バス（１）
+        type: string
+      - name: バス路線名（１）
+        type: string
+      - name: バス停名称（１）
+        type: string
+      - name: 停歩(分)（１）
+        type: string
+      - name: 停歩(ｍ)（１）
+        type: string
+      - name: バス会社コード（１）
+        type: string
+      - name: バス会社名称（１）
+        type: string
+      - name: バス停コード（１）
+        type: string
+      - name: 車（ｋｍ）（１）
+        type: string
+      - name: その他交通手段
+        type: string
+      - name: 交通（分）１
+        type: string
+      - name: 交通（ｍ）２
+        type: string
+      - name: 沿線（２）
+        type: string
+      - name: 沿線名（２）
+        type: string
+      - name: 駅（２）
+        type: string
+      - name: 駅名（２）
+        type: string
+      - name: 連絡駅コード（２）
+        type: string
+      - name: 徒歩（分）１（２）
+        type: string
+      - name: 徒歩（ｍ）２（２）
+        type: string
+      - name: バス（２）
+        type: string
+      - name: バス路線名（２）
+        type: string
+      - name: バス停名称（２）
+        type: string
+      - name: 停歩(分)（２）
+        type: string
+      - name: 停歩(ｍ)（２）　
+        type: string
+      - name: バス会社コード（２）
+        type: string
+      - name: バス会社名称（２）
+        type: string
+      - name: バス停コード（２）
+        type: string
+      - name: 車（ｋｍ）（２）
+        type: string
+      - name: 沿線（３）
+        type: string
+      - name: 沿線名（３）
+        type: string
+      - name: 駅（３）
+        type: string
+      - name: 駅名（３）
+        type: string
+      - name: 連絡駅コード（３）
+        type: string
+      - name: 徒歩（分）１（３）
+        type: string
+      - name: 徒歩（ｍ）２（３）
+        type: string
+      - name: バス（３）
+        type: string
+      - name: バス路線名（３）
+        type: string
+      - name: バス停名称（３）
+        type: string
+      - name: 停歩(分)（３）
+        type: string
+      - name: 停歩(ｍ)（３）
+        type: string
+      - name: バス会社コード（３）
+        type: string
+      - name: バス会社名称（３）
+        type: string
+      - name: バス停コード（３）
+        type: string
+      - name: 車（ｋｍ）（３）
+        type: string
+      - name: 現況
+        type: string
+      - name: 現況予定年月
+        type: string
+      - name: 入居時期
+        type: string
+      - name: 入居年月（西暦）
+        type: string
+      - name: 入居日
+        type: string
+      - name: 入居旬
+        type: string
+      - name: 取引態様
+        type: string
+      - name: 媒介契約年月日（西暦）
+        type: string
+      - name: 報酬形態
+        type: string
+      - name: 負担割合＿貸主
+        type: string
+      - name: 負担割合＿借主
+        type: string
+      - name: 配分割合＿元付
+        type: string
+      - name: 配分割合＿客付
+        type: string
+      - name: 報酬ヶ月
+        type: string
+      - name: 報酬額
+        type: string
+      - name: 賃料履歴
+        type: string
+      - name: 賃料変更年月日
+        type: string
+      - name: 保証金変更履歴
+        type: string
+      - name: 権利金変更履歴
+        type: string
+      - name: 礼金変更履歴
+        type: string
+      - name: 敷金変更履歴
+        type: string
+      - name: 成約賃料
+        type: string
+      - name: 成約賃料消費税
+        type: string
+      - name: 成約坪単価
+        type: string
+      - name: 成約㎡単価
+        type: string
+      - name: 成約前賃料
+        type: string
+      - name: 成約前坪単価賃料
+        type: string
+      - name: 成約前㎡単価
+        type: string
+      - name: 成約前消費税
+        type: string
+      - name: 保証金なしフラグ
+        type: string
+      - name: 保証金１（額）
+        type: string
+      - name: 保証金２（ヶ月）
+        type: string
+      - name: 権利金なしフラグ
+        type: string
+      - name: 権利金１（額）
+        type: string
+      - name: 権利金消費税（額）
+        type: string
+      - name: 権利金２（ヶ月）
+        type: string
+      - name: 礼金なしフラグ
+        type: string
+      - name: 礼金１（額）
+        type: string
+      - name: 礼金消費税（額）
+        type: string
+      - name: 礼金２（ヶ月）
+        type: string
+      - name: 敷金なしフラグ
+        type: string
+      - name: 敷金１（額）
+        type: string
+      - name: 敷金２（ヶ月）
+        type: string
+      - name: 償却＿コード
+        type: string
+      - name: 償却＿総額
+        type: string
+      - name: 償却＿月数
+        type: string
+      - name: 償却＿率
+        type: string
+      - name: 契約期間
+        type: string
+      - name: 契約期限（西暦）
+        type: string
+      - name: 解約引なしフラグ
+        type: string
+      - name: 解約引＿総額
+        type: string
+      - name: 解約引＿月数
+        type: string
+      - name: 解約引＿率
+        type: string
+      - name: 権利譲渡
+        type: string
+      - name: 造作譲渡
+        type: string
+      - name: 土地面積
+        type: string
+      - name: 土地面積（ｆｒｏｍ）
+        type: string
+      - name: 土地面積（ｔｏ）
+        type: string
+      - name: 面積計測方式
+        type: string
+      - name: 建物面積１
+        type: string
+      - name: 建物面積２
+        type: string
+      - name: 使用部分面積
+        type: string
+      - name: 使用部分面積（ｆｒｏｍ）
+        type: string
+      - name: 使用部分面積（ｔｏ）
+        type: string
+      - name: 部分面積（名称）１
+        type: string
+      - name: 部分面積（㎡）１
+        type: string
+      - name: 部分面積（名称）２
+        type: string
+      - name: 部分面積（㎡）２
+        type: string
+      - name: 建物面積（１Ｆ）
+        type: string
+      - name: 建物面積（２Ｆ）
+        type: string
+      - name: 建物面積（３Ｆ）
+        type: string
+      - name: 建物面積（その他）
+        type: string
+      - name: 建物面積延べ部分１
+        type: string
+      - name: 建物面積延べ部分面積１
+        type: string
+      - name: 建物面積延べ部分２
+        type: string
+      - name: 建物面積延べ部分面積２
+        type: string
+      - name: 私道負担有無
+        type: string
+      - name: 私道負担割合（分母）
+        type: string
+      - name: 私道負担割合（分子）
+        type: string
+      - name: 私道面積
+        type: string
+      - name: バルコニー（テラス）面積
+        type: string
+      - name: 専用庭面積
+        type: string
+      - name: セットバック区分
+        type: string
+      - name: 後退距離（ｍ）
+        type: string
+      - name: セットバック面積（㎡）
+        type: string
+      - name: 施設費用項目（１）
+        type: string
+      - name: 施設費用（１）
+        type: string
+      - name: 施設費用項目（２）
+        type: string
+      - name: 施設費用（２）
+        type: string
+      - name: 施設費用項目（３）
+        type: string
+      - name: 施設費用（３）
+        type: string
+      - name: 備品
+        type: string
+      - name: 用途地域（１）
+        type: string
+      - name: 用途地域（２）
+        type: string
+      - name: 登記簿地目
+        type: string
+      - name: 現況地目（登記簿と異なる場合）
+        type: string
+      - name: 都市計画
+        type: string
+      - name: 建ぺい率
+        type: string
+      - name: 容積率
+        type: string
+      - name: 容積率の制限内容
+        type: string
+      - name: 地域地区
+        type: string
+      - name: その他の法令上の制限
+        type: string
+      - name: 最適用途
+        type: string
+      - name: 地勢
+        type: string
+      - name: 建築条件
+        type: string
+      - name: 建物賃貸借区分
+        type: string
+      - name: 建物賃貸借期間
+        type: string
+      - name: 建物賃貸借更新
+        type: string
+      - name: 管理費
+        type: string
+      - name: 管理費無フラグ
+        type: string
+      - name: 管理組合有無
+        type: string
+      - name: 管理費消費税
+        type: string
+      - name: 共益費
+        type: string
+      - name: 共益費無フラグ
+        type: string
+      - name: 共益費消費税
+        type: string
+      - name: 雑費なしフラグ
+        type: string
+      - name: 雑費
+        type: string
+      - name: 雑費消費税
+        type: string
+      - name: その他一時金なしフラグ
+        type: string
+      - name: その他一時金名称（１）
+        type: string
+      - name: 金額（１）
+        type: string
+      - name: その他一時金名称（２）
+        type: string
+      - name: 金額（２）
+        type: string
+      - name: その他一時金名称（３）
+        type: string
+      - name: 金額（３）
+        type: string
+      - name: その他一時金名称（４）
+        type: string
+      - name: 金額（４）
+        type: string
+      - name: その他一時金名称（５）
+        type: string
+      - name: 金額（５）
+        type: string
+      - name: その他月額費名称１
+        type: string
+      - name: その他月額費用金額１
+        type: string
+      - name: その他月額費名称２
+        type: string
+      - name: その他月額費用金額２
+        type: string
+      - name: 更新区分
+        type: string
+      - name: 更新料（額）
+        type: string
+      - name: 更新料（ヶ月）
+        type: string
+      - name: 保険加入義務
+        type: string
+      - name: 保険名称
+        type: string
+      - name: 保険料
+        type: string
+      - name: 保険期間
+        type: string
+      - name: 接道状況
+        type: string
+      - name: 接道種別１
+        type: string
+      - name: 接道接面１
+        type: string
+      - name: 接道位置指定１
+        type: string
+      - name: 接道方向１
+        type: string
+      - name: 接道幅員１
+        type: string
+      - name: 接道種別２
+        type: string
+      - name: 接道接面２
+        type: string
+      - name: 接道位置指定２
+        type: string
+      - name: 接道方向２
+        type: string
+      - name: 接道幅員２
+        type: string
+      - name: 接道種別３
+        type: string
+      - name: 接道接面３
+        type: string
+      - name: 接道位置指定３
+        type: string
+      - name: 接道方向３
+        type: string
+      - name: 接道幅員３
+        type: string
+      - name: 接道種別４
+        type: string
+      - name: 接道接面４
+        type: string
+      - name: 接道位置指定４
+        type: string
+      - name: 接道方向４
+        type: string
+      - name: 接道幅員４
+        type: string
+      - name: 接道舗装
+        type: string
+      - name: 間取タイプ（１）
+        type: string
+      - name: 間取部屋数（１）
+        type: string
+      - name: 部屋位置
+        type: string
+      - name: 納戸数
+        type: string
+      - name: 室所在階１（１）
+        type: string
+      - name: 室タイプ１（１）
+        type: string
+      - name: 室広さ１（１）
+        type: string
+      - name: 室数１（１）
+        type: string
+      - name: 室所在階２（１）
+        type: string
+      - name: 室タイプ２（１）
+        type: string
+      - name: 室広さ２（１）
+        type: string
+      - name: 室数２（１）
+        type: string
+      - name: 室所在階３（１）
+        type: string
+      - name: 室タイプ３（１）
+        type: string
+      - name: 室広さ３（１）
+        type: string
+      - name: 室数３（１）
+        type: string
+      - name: 室所在階４（１）
+        type: string
+      - name: 室タイプ４（１）
+        type: string
+      - name: 室広さ４（１）
+        type: string
+      - name: 室数４（１）
+        type: string
+      - name: 室所在階５（１）
+        type: string
+      - name: 室タイプ５（１）
+        type: string
+      - name: 室広さ５（１）
+        type: string
+      - name: 室数５（１）
+        type: string
+      - name: 室所在階６（１）
+        type: string
+      - name: 室タイプ６（１）
+        type: string
+      - name: 室広さ６（１）
+        type: string
+      - name: 室数６（１）
+        type: string
+      - name: 室所在階７（１）
+        type: string
+      - name: 室タイプ７（１）
+        type: string
+      - name: 室広さ７（１）
+        type: string
+      - name: 室数７（１）
+        type: string
+      - name: 間取りその他（１）
+        type: string
+      - name: 間取タイプ（２）
+        type: string
+      - name: 間取部屋数（２）
+        type: string
+      - name: 室所在階１（２）
+        type: string
+      - name: 室タイプ１（２）
+        type: string
+      - name: 室広さ１（２）
+        type: string
+      - name: 室数１（２）
+        type: string
+      - name: 室所在階２（２）
+        type: string
+      - name: 室タイプ２（２）
+        type: string
+      - name: 室広さ２（２）
+        type: string
+      - name: 室数２（２）
+        type: string
+      - name: 室所在階３（２）
+        type: string
+      - name: 室タイプ３（２）
+        type: string
+      - name: 室広さ３（２）
+        type: string
+      - name: 室数３（２）
+        type: string
+      - name: 室所在階４（２）
+        type: string
+      - name: 室タイプ４（２）
+        type: string
+      - name: 室広さ４（２）
+        type: string
+      - name: 室数４（２）
+        type: string
+      - name: 室所在階５（２）
+        type: string
+      - name: 室タイプ５（２）
+        type: string
+      - name: 室広さ５（２）
+        type: string
+      - name: 室数５（２）
+        type: string
+      - name: 室所在階６（２）
+        type: string
+      - name: 室タイプ６（２）
+        type: string
+      - name: 室広さ６（２）
+        type: string
+      - name: 室数６（２）
+        type: string
+      - name: 室所在階７（２）
+        type: string
+      - name: 室タイプ７（２）
+        type: string
+      - name: 室広さ７（２）
+        type: string
+      - name: 室数７（２）
+        type: string
+      - name: 間取りその他（２）
+        type: string
+      - name: 駐車場在否
+        type: string
+      - name: 駐車場無料フラグ
+        type: string
+      - name: 駐車場月額
+        type: string
+      - name: 駐車場月額消費税
+        type: string
+      - name: 駐車場月額（最低値）
+        type: string
+      - name: 駐車場月額（最高値）
+        type: string
+      - name: 駐車場距離(ｍ)
+        type: string
+      - name: 駐車場形式
+        type: string
+      - name: 駐車場屋根状況
+        type: string
+      - name: 駐車場敷金（額）
+        type: string
+      - name: 駐車場敷金（ヶ月）
+        type: string
+      - name: 駐車場礼金（額）
+        type: string
+      - name: 駐車場礼金（ヶ月）
+        type: string
+      - name: 建物構造
+        type: string
+      - name: 建物工法
+        type: string
+      - name: 建物形式
+        type: string
+      - name: 地上階層
+        type: string
+      - name: 地下階層
+        type: string
+      - name: 所在階
+        type: string
+      - name: 築年月（西暦）
+        type: string
+      - name: 新築フラグ
+        type: string
+      - name: バルコニー方向（１）
+        type: string
+      - name: バルコニー方向（２）
+        type: string
+      - name: バルコニー方向（３）
+        type: string
+      - name: 増改築年月１
+        type: string
+      - name: 増改築履歴１
+        type: string
+      - name: 増改築年月２
+        type: string
+      - name: 増改築履歴２
+        type: string
+      - name: 増改築年月３
+        type: string
+      - name: 増改築履歴３
+        type: string
+      - name: 周辺環境１（フリー）
+        type: string
+      - name: 距離１
+        type: string
+      - name: 時間１
+        type: string
+      - name: 周辺アクセス１
+        type: string
+      - name: 周辺環境２（フリー）
+        type: string
+      - name: 距離２
+        type: string
+      - name: 時間２
+        type: string
+      - name: 周辺アクセス２
+        type: string
+      - name: 周辺環境３（フリー）
+        type: string
+      - name: 距離３
+        type: string
+      - name: 時間３
+        type: string
+      - name: 周辺アクセス３
+        type: string
+      - name: 周辺環境４（フリー）
+        type: string
+      - name: 距離４
+        type: string
+      - name: 時間４
+        type: string
+      - name: 周辺アクセス４
+        type: string
+      - name: 周辺環境５（フリー）
+        type: string
+      - name: 距離５
+        type: string
+      - name: 時間５
+        type: string
+      - name: 周辺アクセス５
+        type: string
+      - name: 備考１
+        type: string
+      - name: 備考２
+        type: string
+      - name: 備考３
+        type: string
+      - name: 備考４
+        type: string
+      - name: 設備（フリースペース）
+        type: string
+      - name: 特記事項（フリースペース）
+        type: string
+      - name: 本体登録メッセージ
+        type: string
+      - name: "［賃貸］賃貸戸数"
+        type: string
+      - name: "［賃貸］棟総戸数"
+        type: string
+      - name: "［賃貸］連棟戸数"
+        type: string
+      - name: 鍵交換区分
+        type: string
+      - name: 鍵交換代金
+        type: string
+      - name: 広告転載区分
+        type: string
+      - name: 自社管理欄
+        type: string
+      - name: 証明書発行フラグ
+        type: string
+      - name: 証明書発行設定フラグ
+        type: string
+      - name: 統計反映区分
+        type: string
+      - name: システム作成日
+        type: string
+      - name: システム更新日
+        type: string
+      - name: 更新端末
+        type: string
+      quote: "\""
+      escape: "\""
+    decoders:
+    - type: zip
+      match_name:
+  out:
+    type: bigquery
+    bigquery_connection:
+      id: 761
+      name: csdemo-BigQuery
+    dataset: kimura_test
+    table: 251210_zip
+    auto_create_dataset: false
+    mode: append_direct
+    location: asia-northeast1
+    open_timeout_sec: 300
+    timeout_sec: 300
+    send_timeout_sec: 300
+    read_timeout_sec: 300
+    retries: 5
+    allow_quoted_newlines: true
+    column_options: []
+    template_table: ''
+    custom_variables: []
+  data_settings:
+    columns:
+    - name: 状態区分
+      src: 状態区分
+      default: ''
+      type: string
+    - name: 物件番号
+      src: 物件番号
+      default: ''
+      type: string
+    - name: データ種類
+      src: データ種類
+      default: ''
+      type: string
+    - name: 物件種別
+      src: 物件種別
+      default: ''
+      type: string
+    - name: 物件種目
+      src: 物件種目
+      default: ''
+      type: string
+    - name: 会員番号
+      src: 会員番号
+      default: ''
+      type: string
+    - name: 商号
+      src: 商号
+      default: ''
+      type: string
+    - name: 商号（本支店名）
+      src: 商号（本支店名）
+      default: ''
+      type: string
+    - name: 電話番号
+      src: 電話番号
+      default: ''
+      type: string
+    - name: 問合せ担当者（１）
+      src: 問合せ担当者（１）
+      default: ''
+      type: string
+    - name: 問合せ電話番号（１）
+      src: 問合せ電話番号（１）
+      default: ''
+      type: string
+    - name: Ｅメールアドレス（１）
+      src: Ｅメールアドレス（１）
+      default: ''
+      type: string
+    - name: 問合せ担当者（２）
+      src: 問合せ担当者（２）
+      default: ''
+      type: string
+    - name: 問合せ電話番号（２）
+      src: 問合せ電話番号（２）
+      default: ''
+      type: string
+    - name: Ｅメールアドレス（２）
+      src: Ｅメールアドレス（２）
+      default: ''
+      type: string
+    - name: 取引主任者
+      src: 取引主任者
+      default: ''
+      type: string
+    - name: 免許コード
+      src: 免許コード
+      default: ''
+      type: string
+    - name: 免許更新回数
+      src: 免許更新回数
+      default: ''
+      type: string
+    - name: 支店名
+      src: 支店名
+      default: ''
+      type: string
+    - name: 郵便番号
+      src: 郵便番号
+      default: ''
+      type: string
+    - name: 所在地３－１
+      src: 所在地３－１
+      default: ''
+      type: string
+    - name: 所在地３－２
+      src: 所在地３－２
+      default: ''
+      type: string
+    - name: ＦＡＸ
+      src: ＦＡＸ
+      default: ''
+      type: string
+    - name: 商号のフォント
+      src: 商号のフォント
+      default: ''
+      type: string
+    - name: 広告主の名称又は商号
+      src: 広告主の名称又は商号
+      default: ''
+      type: string
+    - name: 広告主の事務所所在地
+      src: 広告主の事務所所在地
+      default: ''
+      type: string
+    - name: 広告主の事務所電話番号
+      src: 広告主の事務所電話番号
+      default: ''
+      type: string
+    - name: 宅建業法による免許番号
+      src: 宅建業法による免許番号
+      default: ''
+      type: string
+    - name: 図面
+      src: 図面
+      default: ''
+      type: string
+    - name: 元物件番号
+      src: 元物件番号
+      default: ''
+      type: string
+    - name: 在庫月報送信フラグ
+      src: 在庫月報送信フラグ
+      default: ''
+      type: string
+    - name: 登録年月日
+      src: 登録年月日
+      default: ''
+      type: string
+    - name: 変更年月日
+      src: 変更年月日
+      default: ''
+      type: string
+    - name: 修正年月日
+      src: 修正年月日
+      default: ''
+      type: string
+    - name: 成約登録年月日
+      src: 成約登録年月日
+      default: ''
+      type: string
+    - name: 成約年月日
+      src: 成約年月日
+      default: ''
+      type: string
+    - name: 削除年月日
+      src: 削除年月日
+      default: ''
+      type: string
+    - name: 図面変更年月日
+      src: 図面変更年月日
+      default: ''
+      type: string
+    - name: 初回登録年月日
+      src: 初回登録年月日
+      default: ''
+      type: string
+    - name: 削除年月日(yymmddhhmmss）
+      src: 削除年月日(yymmddhhmmss）
+      default: ''
+      type: string
+    - name: 図面変更年月日(yymmddhhmmss）
+      src: 図面変更年月日(yymmddhhmmss）
+      default: ''
+      type: string
+    - name: 再登録年月日
+      src: 再登録年月日
+      default: ''
+      type: string
+    - name: 日報掲載予定日
+      src: 日報掲載予定日
+      default: ''
+      type: string
+    - name: 削除予定年月日
+      src: 削除予定年月日
+      default: ''
+      type: string
+    - name: アクセス年月日
+      src: アクセス年月日
+      default: ''
+      type: string
+    - name: 取引条件の有効期限
+      src: 取引条件の有効期限
+      default: ''
+      type: string
+    - name: 特優賃区分
+      src: 特優賃区分
+      default: ''
+      type: string
+    - name: 入力形態区分
+      src: 入力形態区分
+      default: ''
+      type: string
+    - name: 所在地１
+      src: 所在地１
+      default: ''
+      type: string
+    - name: 所在地２
+      src: 所在地２
+      default: ''
+      type: string
+    - name: 都道府県名
+      src: 都道府県名
+      default: ''
+      type: string
+    - name: 所在地名１
+      src: 所在地名１
+      default: ''
+      type: string
+    - name: 所在地名２
+      src: 所在地名２
+      default: ''
+      type: string
+    - name: 所在地３
+      src: 所在地３
+      default: ''
+      type: string
+    - name: 所在地３公開フラグ
+      src: 所在地３公開フラグ
+      default: ''
+      type: string
+    - name: 建物名
+      src: 建物名
+      default: ''
+      type: string
+    - name: 経度
+      src: 経度
+      default: ''
+      type: string
+    - name: 緯度
+      src: 緯度
+      default: ''
+      type: string
+    - name: 建物名公開フラグ
+      src: 建物名公開フラグ
+      default: ''
+      type: string
+    - name: 部屋番号
+      src: 部屋番号
+      default: ''
+      type: string
+    - name: 部屋番号公開フラグ
+      src: 部屋番号公開フラグ
+      default: ''
+      type: string
+    - name: その他所在地表示
+      src: その他所在地表示
+      default: ''
+      type: string
+    - name: 棟番号
+      src: 棟番号
+      default: ''
+      type: string
+    - name: 沿線（１）
+      src: 沿線（１）
+      default: ''
+      type: string
+    - name: 沿線名（１）
+      src: 沿線名（１）
+      default: ''
+      type: string
+    - name: 駅（１）
+      src: 駅（１）
+      default: ''
+      type: string
+    - name: 駅名（１）
+      src: 駅名（１）
+      default: ''
+      type: string
+    - name: 連絡駅コード（１）
+      src: 連絡駅コード（１）
+      default: ''
+      type: string
+    - name: 徒歩（分）１（１）
+      src: 徒歩（分）１（１）
+      default: ''
+      type: string
+    - name: 徒歩（ｍ）２（１）
+      src: 徒歩（ｍ）２（１）
+      default: ''
+      type: string
+    - name: バス（１）
+      src: バス（１）
+      default: ''
+      type: string
+    - name: バス路線名（１）
+      src: バス路線名（１）
+      default: ''
+      type: string
+    - name: バス停名称（１）
+      src: バス停名称（１）
+      default: ''
+      type: string
+    - name: 停歩(分)（１）
+      src: 停歩(分)（１）
+      default: ''
+      type: string
+    - name: 停歩(ｍ)（１）
+      src: 停歩(ｍ)（１）
+      default: ''
+      type: string
+    - name: バス会社コード（１）
+      src: バス会社コード（１）
+      default: ''
+      type: string
+    - name: バス会社名称（１）
+      src: バス会社名称（１）
+      default: ''
+      type: string
+    - name: バス停コード（１）
+      src: バス停コード（１）
+      default: ''
+      type: string
+    - name: 車（ｋｍ）（１）
+      src: 車（ｋｍ）（１）
+      default: ''
+      type: string
+    - name: その他交通手段
+      src: その他交通手段
+      default: ''
+      type: string
+    - name: 交通（分）１
+      src: 交通（分）１
+      default: ''
+      type: string
+    - name: 交通（ｍ）２
+      src: 交通（ｍ）２
+      default: ''
+      type: string
+    - name: 沿線（２）
+      src: 沿線（２）
+      default: ''
+      type: string
+    - name: 沿線名（２）
+      src: 沿線名（２）
+      default: ''
+      type: string
+    - name: 駅（２）
+      src: 駅（２）
+      default: ''
+      type: string
+    - name: 駅名（２）
+      src: 駅名（２）
+      default: ''
+      type: string
+    - name: 連絡駅コード（２）
+      src: 連絡駅コード（２）
+      default: ''
+      type: string
+    - name: 徒歩（分）１（２）
+      src: 徒歩（分）１（２）
+      default: ''
+      type: string
+    - name: 徒歩（ｍ）２（２）
+      src: 徒歩（ｍ）２（２）
+      default: ''
+      type: string
+    - name: バス（２）
+      src: バス（２）
+      default: ''
+      type: string
+    - name: バス路線名（２）
+      src: バス路線名（２）
+      default: ''
+      type: string
+    - name: バス停名称（２）
+      src: バス停名称（２）
+      default: ''
+      type: string
+    - name: 停歩(分)（２）
+      src: 停歩(分)（２）
+      default: ''
+      type: string
+    - name: 停歩(ｍ)（２）　
+      src: 停歩(ｍ)（２）　
+      default: ''
+      type: string
+    - name: バス会社コード（２）
+      src: バス会社コード（２）
+      default: ''
+      type: string
+    - name: バス会社名称（２）
+      src: バス会社名称（２）
+      default: ''
+      type: string
+    - name: バス停コード（２）
+      src: バス停コード（２）
+      default: ''
+      type: string
+    - name: 車（ｋｍ）（２）
+      src: 車（ｋｍ）（２）
+      default: ''
+      type: string
+    - name: 沿線（３）
+      src: 沿線（３）
+      default: ''
+      type: string
+    - name: 沿線名（３）
+      src: 沿線名（３）
+      default: ''
+      type: string
+    - name: 駅（３）
+      src: 駅（３）
+      default: ''
+      type: string
+    - name: 駅名（３）
+      src: 駅名（３）
+      default: ''
+      type: string
+    - name: 連絡駅コード（３）
+      src: 連絡駅コード（３）
+      default: ''
+      type: string
+    - name: 徒歩（分）１（３）
+      src: 徒歩（分）１（３）
+      default: ''
+      type: string
+    - name: 徒歩（ｍ）２（３）
+      src: 徒歩（ｍ）２（３）
+      default: ''
+      type: string
+    - name: バス（３）
+      src: バス（３）
+      default: ''
+      type: string
+    - name: バス路線名（３）
+      src: バス路線名（３）
+      default: ''
+      type: string
+    - name: バス停名称（３）
+      src: バス停名称（３）
+      default: ''
+      type: string
+    - name: 停歩(分)（３）
+      src: 停歩(分)（３）
+      default: ''
+      type: string
+    - name: 停歩(ｍ)（３）
+      src: 停歩(ｍ)（３）
+      default: ''
+      type: string
+    - name: バス会社コード（３）
+      src: バス会社コード（３）
+      default: ''
+      type: string
+    - name: バス会社名称（３）
+      src: バス会社名称（３）
+      default: ''
+      type: string
+    - name: バス停コード（３）
+      src: バス停コード（３）
+      default: ''
+      type: string
+    - name: 車（ｋｍ）（３）
+      src: 車（ｋｍ）（３）
+      default: ''
+      type: string
+    - name: 現況
+      src: 現況
+      default: ''
+      type: string
+    - name: 現況予定年月
+      src: 現況予定年月
+      default: ''
+      type: string
+    - name: 入居時期
+      src: 入居時期
+      default: ''
+      type: string
+    - name: 入居年月（西暦）
+      src: 入居年月（西暦）
+      default: ''
+      type: string
+    - name: 入居日
+      src: 入居日
+      default: ''
+      type: string
+    - name: 入居旬
+      src: 入居旬
+      default: ''
+      type: string
+    - name: 取引態様
+      src: 取引態様
+      default: ''
+      type: string
+    - name: 媒介契約年月日（西暦）
+      src: 媒介契約年月日（西暦）
+      default: ''
+      type: string
+    - name: 報酬形態
+      src: 報酬形態
+      default: ''
+      type: string
+    - name: 負担割合＿貸主
+      src: 負担割合＿貸主
+      default: ''
+      type: string
+    - name: 負担割合＿借主
+      src: 負担割合＿借主
+      default: ''
+      type: string
+    - name: 配分割合＿元付
+      src: 配分割合＿元付
+      default: ''
+      type: string
+    - name: 配分割合＿客付
+      src: 配分割合＿客付
+      default: ''
+      type: string
+    - name: 報酬ヶ月
+      src: 報酬ヶ月
+      default: ''
+      type: string
+    - name: 報酬額
+      src: 報酬額
+      default: ''
+      type: string
+    - name: 賃料履歴
+      src: 賃料履歴
+      default: ''
+      type: string
+    - name: 賃料変更年月日
+      src: 賃料変更年月日
+      default: ''
+      type: string
+    - name: 保証金変更履歴
+      src: 保証金変更履歴
+      default: ''
+      type: string
+    - name: 権利金変更履歴
+      src: 権利金変更履歴
+      default: ''
+      type: string
+    - name: 礼金変更履歴
+      src: 礼金変更履歴
+      default: ''
+      type: string
+    - name: 敷金変更履歴
+      src: 敷金変更履歴
+      default: ''
+      type: string
+    - name: 成約賃料
+      src: 成約賃料
+      default: ''
+      type: string
+    - name: 成約賃料消費税
+      src: 成約賃料消費税
+      default: ''
+      type: string
+    - name: 成約坪単価
+      src: 成約坪単価
+      default: ''
+      type: string
+    - name: 成約㎡単価
+      src: 成約㎡単価
+      default: ''
+      type: string
+    - name: 成約前賃料
+      src: 成約前賃料
+      default: ''
+      type: string
+    - name: 成約前坪単価賃料
+      src: 成約前坪単価賃料
+      default: ''
+      type: string
+    - name: 成約前㎡単価
+      src: 成約前㎡単価
+      default: ''
+      type: string
+    - name: 成約前消費税
+      src: 成約前消費税
+      default: ''
+      type: string
+    - name: 保証金なしフラグ
+      src: 保証金なしフラグ
+      default: ''
+      type: string
+    - name: 保証金１（額）
+      src: 保証金１（額）
+      default: ''
+      type: string
+    - name: 保証金２（ヶ月）
+      src: 保証金２（ヶ月）
+      default: ''
+      type: string
+    - name: 権利金なしフラグ
+      src: 権利金なしフラグ
+      default: ''
+      type: string
+    - name: 権利金１（額）
+      src: 権利金１（額）
+      default: ''
+      type: string
+    - name: 権利金消費税（額）
+      src: 権利金消費税（額）
+      default: ''
+      type: string
+    - name: 権利金２（ヶ月）
+      src: 権利金２（ヶ月）
+      default: ''
+      type: string
+    - name: 礼金なしフラグ
+      src: 礼金なしフラグ
+      default: ''
+      type: string
+    - name: 礼金１（額）
+      src: 礼金１（額）
+      default: ''
+      type: string
+    - name: 礼金消費税（額）
+      src: 礼金消費税（額）
+      default: ''
+      type: string
+    - name: 礼金２（ヶ月）
+      src: 礼金２（ヶ月）
+      default: ''
+      type: string
+    - name: 敷金なしフラグ
+      src: 敷金なしフラグ
+      default: ''
+      type: string
+    - name: 敷金１（額）
+      src: 敷金１（額）
+      default: ''
+      type: string
+    - name: 敷金２（ヶ月）
+      src: 敷金２（ヶ月）
+      default: ''
+      type: string
+    - name: 償却＿コード
+      src: 償却＿コード
+      default: ''
+      type: string
+    - name: 償却＿総額
+      src: 償却＿総額
+      default: ''
+      type: string
+    - name: 償却＿月数
+      src: 償却＿月数
+      default: ''
+      type: string
+    - name: 償却＿率
+      src: 償却＿率
+      default: ''
+      type: string
+    - name: 契約期間
+      src: 契約期間
+      default: ''
+      type: string
+    - name: 契約期限（西暦）
+      src: 契約期限（西暦）
+      default: ''
+      type: string
+    - name: 解約引なしフラグ
+      src: 解約引なしフラグ
+      default: ''
+      type: string
+    - name: 解約引＿総額
+      src: 解約引＿総額
+      default: ''
+      type: string
+    - name: 解約引＿月数
+      src: 解約引＿月数
+      default: ''
+      type: string
+    - name: 解約引＿率
+      src: 解約引＿率
+      default: ''
+      type: string
+    - name: 権利譲渡
+      src: 権利譲渡
+      default: ''
+      type: string
+    - name: 造作譲渡
+      src: 造作譲渡
+      default: ''
+      type: string
+    - name: 土地面積
+      src: 土地面積
+      default: ''
+      type: string
+    - name: 土地面積（ｆｒｏｍ）
+      src: 土地面積（ｆｒｏｍ）
+      default: ''
+      type: string
+    - name: 土地面積（ｔｏ）
+      src: 土地面積（ｔｏ）
+      default: ''
+      type: string
+    - name: 面積計測方式
+      src: 面積計測方式
+      default: ''
+      type: string
+    - name: 建物面積１
+      src: 建物面積１
+      default: ''
+      type: string
+    - name: 建物面積２
+      src: 建物面積２
+      default: ''
+      type: string
+    - name: 使用部分面積
+      src: 使用部分面積
+      default: ''
+      type: string
+    - name: 使用部分面積（ｆｒｏｍ）
+      src: 使用部分面積（ｆｒｏｍ）
+      default: ''
+      type: string
+    - name: 使用部分面積（ｔｏ）
+      src: 使用部分面積（ｔｏ）
+      default: ''
+      type: string
+    - name: 部分面積（名称）１
+      src: 部分面積（名称）１
+      default: ''
+      type: string
+    - name: 部分面積（㎡）１
+      src: 部分面積（㎡）１
+      default: ''
+      type: string
+    - name: 部分面積（名称）２
+      src: 部分面積（名称）２
+      default: ''
+      type: string
+    - name: 部分面積（㎡）２
+      src: 部分面積（㎡）２
+      default: ''
+      type: string
+    - name: 建物面積（１Ｆ）
+      src: 建物面積（１Ｆ）
+      default: ''
+      type: string
+    - name: 建物面積（２Ｆ）
+      src: 建物面積（２Ｆ）
+      default: ''
+      type: string
+    - name: 建物面積（３Ｆ）
+      src: 建物面積（３Ｆ）
+      default: ''
+      type: string
+    - name: 建物面積（その他）
+      src: 建物面積（その他）
+      default: ''
+      type: string
+    - name: 建物面積延べ部分１
+      src: 建物面積延べ部分１
+      default: ''
+      type: string
+    - name: 建物面積延べ部分面積１
+      src: 建物面積延べ部分面積１
+      default: ''
+      type: string
+    - name: 建物面積延べ部分２
+      src: 建物面積延べ部分２
+      default: ''
+      type: string
+    - name: 建物面積延べ部分面積２
+      src: 建物面積延べ部分面積２
+      default: ''
+      type: string
+    - name: 私道負担有無
+      src: 私道負担有無
+      default: ''
+      type: string
+    - name: 私道負担割合（分母）
+      src: 私道負担割合（分母）
+      default: ''
+      type: string
+    - name: 私道負担割合（分子）
+      src: 私道負担割合（分子）
+      default: ''
+      type: string
+    - name: 私道面積
+      src: 私道面積
+      default: ''
+      type: string
+    - name: バルコニー（テラス）面積
+      src: バルコニー（テラス）面積
+      default: ''
+      type: string
+    - name: 専用庭面積
+      src: 専用庭面積
+      default: ''
+      type: string
+    - name: セットバック区分
+      src: セットバック区分
+      default: ''
+      type: string
+    - name: 後退距離（ｍ）
+      src: 後退距離（ｍ）
+      default: ''
+      type: string
+    - name: セットバック面積（㎡）
+      src: セットバック面積（㎡）
+      default: ''
+      type: string
+    - name: 施設費用項目（１）
+      src: 施設費用項目（１）
+      default: ''
+      type: string
+    - name: 施設費用（１）
+      src: 施設費用（１）
+      default: ''
+      type: string
+    - name: 施設費用項目（２）
+      src: 施設費用項目（２）
+      default: ''
+      type: string
+    - name: 施設費用（２）
+      src: 施設費用（２）
+      default: ''
+      type: string
+    - name: 施設費用項目（３）
+      src: 施設費用項目（３）
+      default: ''
+      type: string
+    - name: 施設費用（３）
+      src: 施設費用（３）
+      default: ''
+      type: string
+    - name: 備品
+      src: 備品
+      default: ''
+      type: string
+    - name: 用途地域（１）
+      src: 用途地域（１）
+      default: ''
+      type: string
+    - name: 用途地域（２）
+      src: 用途地域（２）
+      default: ''
+      type: string
+    - name: 登記簿地目
+      src: 登記簿地目
+      default: ''
+      type: string
+    - name: 現況地目（登記簿と異なる場合）
+      src: 現況地目（登記簿と異なる場合）
+      default: ''
+      type: string
+    - name: 都市計画
+      src: 都市計画
+      default: ''
+      type: string
+    - name: 建ぺい率
+      src: 建ぺい率
+      default: ''
+      type: string
+    - name: 容積率
+      src: 容積率
+      default: ''
+      type: string
+    - name: 容積率の制限内容
+      src: 容積率の制限内容
+      default: ''
+      type: string
+    - name: 地域地区
+      src: 地域地区
+      default: ''
+      type: string
+    - name: その他の法令上の制限
+      src: その他の法令上の制限
+      default: ''
+      type: string
+    - name: 最適用途
+      src: 最適用途
+      default: ''
+      type: string
+    - name: 地勢
+      src: 地勢
+      default: ''
+      type: string
+    - name: 建築条件
+      src: 建築条件
+      default: ''
+      type: string
+    - name: 建物賃貸借区分
+      src: 建物賃貸借区分
+      default: ''
+      type: string
+    - name: 建物賃貸借期間
+      src: 建物賃貸借期間
+      default: ''
+      type: string
+    - name: 建物賃貸借更新
+      src: 建物賃貸借更新
+      default: ''
+      type: string
+    - name: 管理費
+      src: 管理費
+      default: ''
+      type: string
+    - name: 管理費無フラグ
+      src: 管理費無フラグ
+      default: ''
+      type: string
+    - name: 管理組合有無
+      src: 管理組合有無
+      default: ''
+      type: string
+    - name: 管理費消費税
+      src: 管理費消費税
+      default: ''
+      type: string
+    - name: 共益費
+      src: 共益費
+      default: ''
+      type: string
+    - name: 共益費無フラグ
+      src: 共益費無フラグ
+      default: ''
+      type: string
+    - name: 共益費消費税
+      src: 共益費消費税
+      default: ''
+      type: string
+    - name: 雑費なしフラグ
+      src: 雑費なしフラグ
+      default: ''
+      type: string
+    - name: 雑費
+      src: 雑費
+      default: ''
+      type: string
+    - name: 雑費消費税
+      src: 雑費消費税
+      default: ''
+      type: string
+    - name: その他一時金なしフラグ
+      src: その他一時金なしフラグ
+      default: ''
+      type: string
+    - name: その他一時金名称（１）
+      src: その他一時金名称（１）
+      default: ''
+      type: string
+    - name: 金額（１）
+      src: 金額（１）
+      default: ''
+      type: string
+    - name: その他一時金名称（２）
+      src: その他一時金名称（２）
+      default: ''
+      type: string
+    - name: 金額（２）
+      src: 金額（２）
+      default: ''
+      type: string
+    - name: その他一時金名称（３）
+      src: その他一時金名称（３）
+      default: ''
+      type: string
+    - name: 金額（３）
+      src: 金額（３）
+      default: ''
+      type: string
+    - name: その他一時金名称（４）
+      src: その他一時金名称（４）
+      default: ''
+      type: string
+    - name: 金額（４）
+      src: 金額（４）
+      default: ''
+      type: string
+    - name: その他一時金名称（５）
+      src: その他一時金名称（５）
+      default: ''
+      type: string
+    - name: 金額（５）
+      src: 金額（５）
+      default: ''
+      type: string
+    - name: その他月額費名称１
+      src: その他月額費名称１
+      default: ''
+      type: string
+    - name: その他月額費用金額１
+      src: その他月額費用金額１
+      default: ''
+      type: string
+    - name: その他月額費名称２
+      src: その他月額費名称２
+      default: ''
+      type: string
+    - name: その他月額費用金額２
+      src: その他月額費用金額２
+      default: ''
+      type: string
+    - name: 更新区分
+      src: 更新区分
+      default: ''
+      type: string
+    - name: 更新料（額）
+      src: 更新料（額）
+      default: ''
+      type: string
+    - name: 更新料（ヶ月）
+      src: 更新料（ヶ月）
+      default: ''
+      type: string
+    - name: 保険加入義務
+      src: 保険加入義務
+      default: ''
+      type: string
+    - name: 保険名称
+      src: 保険名称
+      default: ''
+      type: string
+    - name: 保険料
+      src: 保険料
+      default: ''
+      type: string
+    - name: 保険期間
+      src: 保険期間
+      default: ''
+      type: string
+    - name: 接道状況
+      src: 接道状況
+      default: ''
+      type: string
+    - name: 接道種別１
+      src: 接道種別１
+      default: ''
+      type: string
+    - name: 接道接面１
+      src: 接道接面１
+      default: ''
+      type: string
+    - name: 接道位置指定１
+      src: 接道位置指定１
+      default: ''
+      type: string
+    - name: 接道方向１
+      src: 接道方向１
+      default: ''
+      type: string
+    - name: 接道幅員１
+      src: 接道幅員１
+      default: ''
+      type: string
+    - name: 接道種別２
+      src: 接道種別２
+      default: ''
+      type: string
+    - name: 接道接面２
+      src: 接道接面２
+      default: ''
+      type: string
+    - name: 接道位置指定２
+      src: 接道位置指定２
+      default: ''
+      type: string
+    - name: 接道方向２
+      src: 接道方向２
+      default: ''
+      type: string
+    - name: 接道幅員２
+      src: 接道幅員２
+      default: ''
+      type: string
+    - name: 接道種別３
+      src: 接道種別３
+      default: ''
+      type: string
+    - name: 接道接面３
+      src: 接道接面３
+      default: ''
+      type: string
+    - name: 接道位置指定３
+      src: 接道位置指定３
+      default: ''
+      type: string
+    - name: 接道方向３
+      src: 接道方向３
+      default: ''
+      type: string
+    - name: 接道幅員３
+      src: 接道幅員３
+      default: ''
+      type: string
+    - name: 接道種別４
+      src: 接道種別４
+      default: ''
+      type: string
+    - name: 接道接面４
+      src: 接道接面４
+      default: ''
+      type: string
+    - name: 接道位置指定４
+      src: 接道位置指定４
+      default: ''
+      type: string
+    - name: 接道方向４
+      src: 接道方向４
+      default: ''
+      type: string
+    - name: 接道幅員４
+      src: 接道幅員４
+      default: ''
+      type: string
+    - name: 接道舗装
+      src: 接道舗装
+      default: ''
+      type: string
+    - name: 間取タイプ（１）
+      src: 間取タイプ（１）
+      default: ''
+      type: string
+    - name: 間取部屋数（１）
+      src: 間取部屋数（１）
+      default: ''
+      type: string
+    - name: 部屋位置
+      src: 部屋位置
+      default: ''
+      type: string
+    - name: 納戸数
+      src: 納戸数
+      default: ''
+      type: string
+    - name: 室所在階１（１）
+      src: 室所在階１（１）
+      default: ''
+      type: string
+    - name: 室タイプ１（１）
+      src: 室タイプ１（１）
+      default: ''
+      type: string
+    - name: 室広さ１（１）
+      src: 室広さ１（１）
+      default: ''
+      type: string
+    - name: 室数１（１）
+      src: 室数１（１）
+      default: ''
+      type: string
+    - name: 室所在階２（１）
+      src: 室所在階２（１）
+      default: ''
+      type: string
+    - name: 室タイプ２（１）
+      src: 室タイプ２（１）
+      default: ''
+      type: string
+    - name: 室広さ２（１）
+      src: 室広さ２（１）
+      default: ''
+      type: string
+    - name: 室数２（１）
+      src: 室数２（１）
+      default: ''
+      type: string
+    - name: 室所在階３（１）
+      src: 室所在階３（１）
+      default: ''
+      type: string
+    - name: 室タイプ３（１）
+      src: 室タイプ３（１）
+      default: ''
+      type: string
+    - name: 室広さ３（１）
+      src: 室広さ３（１）
+      default: ''
+      type: string
+    - name: 室数３（１）
+      src: 室数３（１）
+      default: ''
+      type: string
+    - name: 室所在階４（１）
+      src: 室所在階４（１）
+      default: ''
+      type: string
+    - name: 室タイプ４（１）
+      src: 室タイプ４（１）
+      default: ''
+      type: string
+    - name: 室広さ４（１）
+      src: 室広さ４（１）
+      default: ''
+      type: string
+    - name: 室数４（１）
+      src: 室数４（１）
+      default: ''
+      type: string
+    - name: 室所在階５（１）
+      src: 室所在階５（１）
+      default: ''
+      type: string
+    - name: 室タイプ５（１）
+      src: 室タイプ５（１）
+      default: ''
+      type: string
+    - name: 室広さ５（１）
+      src: 室広さ５（１）
+      default: ''
+      type: string
+    - name: 室数５（１）
+      src: 室数５（１）
+      default: ''
+      type: string
+    - name: 室所在階６（１）
+      src: 室所在階６（１）
+      default: ''
+      type: string
+    - name: 室タイプ６（１）
+      src: 室タイプ６（１）
+      default: ''
+      type: string
+    - name: 室広さ６（１）
+      src: 室広さ６（１）
+      default: ''
+      type: string
+    - name: 室数６（１）
+      src: 室数６（１）
+      default: ''
+      type: string
+    - name: 室所在階７（１）
+      src: 室所在階７（１）
+      default: ''
+      type: string
+    - name: 室タイプ７（１）
+      src: 室タイプ７（１）
+      default: ''
+      type: string
+    - name: 室広さ７（１）
+      src: 室広さ７（１）
+      default: ''
+      type: string
+    - name: 室数７（１）
+      src: 室数７（１）
+      default: ''
+      type: string
+    - name: 間取りその他（１）
+      src: 間取りその他（１）
+      default: ''
+      type: string
+    - name: 間取タイプ（２）
+      src: 間取タイプ（２）
+      default: ''
+      type: string
+    - name: 間取部屋数（２）
+      src: 間取部屋数（２）
+      default: ''
+      type: string
+    - name: 室所在階１（２）
+      src: 室所在階１（２）
+      default: ''
+      type: string
+    - name: 室タイプ１（２）
+      src: 室タイプ１（２）
+      default: ''
+      type: string
+    - name: 室広さ１（２）
+      src: 室広さ１（２）
+      default: ''
+      type: string
+    - name: 室数１（２）
+      src: 室数１（２）
+      default: ''
+      type: string
+    - name: 室所在階２（２）
+      src: 室所在階２（２）
+      default: ''
+      type: string
+    - name: 室タイプ２（２）
+      src: 室タイプ２（２）
+      default: ''
+      type: string
+    - name: 室広さ２（２）
+      src: 室広さ２（２）
+      default: ''
+      type: string
+    - name: 室数２（２）
+      src: 室数２（２）
+      default: ''
+      type: string
+    - name: 室所在階３（２）
+      src: 室所在階３（２）
+      default: ''
+      type: string
+    - name: 室タイプ３（２）
+      src: 室タイプ３（２）
+      default: ''
+      type: string
+    - name: 室広さ３（２）
+      src: 室広さ３（２）
+      default: ''
+      type: string
+    - name: 室数３（２）
+      src: 室数３（２）
+      default: ''
+      type: string
+    - name: 室所在階４（２）
+      src: 室所在階４（２）
+      default: ''
+      type: string
+    - name: 室タイプ４（２）
+      src: 室タイプ４（２）
+      default: ''
+      type: string
+    - name: 室広さ４（２）
+      src: 室広さ４（２）
+      default: ''
+      type: string
+    - name: 室数４（２）
+      src: 室数４（２）
+      default: ''
+      type: string
+    - name: 室所在階５（２）
+      src: 室所在階５（２）
+      default: ''
+      type: string
+    - name: 室タイプ５（２）
+      src: 室タイプ５（２）
+      default: ''
+      type: string
+    - name: 室広さ５（２）
+      src: 室広さ５（２）
+      default: ''
+      type: string
+    - name: 室数５（２）
+      src: 室数５（２）
+      default: ''
+      type: string
+    - name: 室所在階６（２）
+      src: 室所在階６（２）
+      default: ''
+      type: string
+    - name: 室タイプ６（２）
+      src: 室タイプ６（２）
+      default: ''
+      type: string
+    - name: 室広さ６（２）
+      src: 室広さ６（２）
+      default: ''
+      type: string
+    - name: 室数６（２）
+      src: 室数６（２）
+      default: ''
+      type: string
+    - name: 室所在階７（２）
+      src: 室所在階７（２）
+      default: ''
+      type: string
+    - name: 室タイプ７（２）
+      src: 室タイプ７（２）
+      default: ''
+      type: string
+    - name: 室広さ７（２）
+      src: 室広さ７（２）
+      default: ''
+      type: string
+    - name: 室数７（２）
+      src: 室数７（２）
+      default: ''
+      type: string
+    - name: 間取りその他（２）
+      src: 間取りその他（２）
+      default: ''
+      type: string
+    - name: 駐車場在否
+      src: 駐車場在否
+      default: ''
+      type: string
+    - name: 駐車場無料フラグ
+      src: 駐車場無料フラグ
+      default: ''
+      type: string
+    - name: 駐車場月額
+      src: 駐車場月額
+      default: ''
+      type: string
+    - name: 駐車場月額消費税
+      src: 駐車場月額消費税
+      default: ''
+      type: string
+    - name: 駐車場月額（最低値）
+      src: 駐車場月額（最低値）
+      default: ''
+      type: string
+    - name: 駐車場月額（最高値）
+      src: 駐車場月額（最高値）
+      default: ''
+      type: string
+    - name: 駐車場距離(ｍ)
+      src: 駐車場距離(ｍ)
+      default: ''
+      type: string
+    - name: 駐車場形式
+      src: 駐車場形式
+      default: ''
+      type: string
+    - name: 駐車場屋根状況
+      src: 駐車場屋根状況
+      default: ''
+      type: string
+    - name: 駐車場敷金（額）
+      src: 駐車場敷金（額）
+      default: ''
+      type: string
+    - name: 駐車場敷金（ヶ月）
+      src: 駐車場敷金（ヶ月）
+      default: ''
+      type: string
+    - name: 駐車場礼金（額）
+      src: 駐車場礼金（額）
+      default: ''
+      type: string
+    - name: 駐車場礼金（ヶ月）
+      src: 駐車場礼金（ヶ月）
+      default: ''
+      type: string
+    - name: 建物構造
+      src: 建物構造
+      default: ''
+      type: string
+    - name: 建物工法
+      src: 建物工法
+      default: ''
+      type: string
+    - name: 建物形式
+      src: 建物形式
+      default: ''
+      type: string
+    - name: 地上階層
+      src: 地上階層
+      default: ''
+      type: string
+    - name: 地下階層
+      src: 地下階層
+      default: ''
+      type: string
+    - name: 所在階
+      src: 所在階
+      default: ''
+      type: string
+    - name: 築年月（西暦）
+      src: 築年月（西暦）
+      default: ''
+      type: string
+    - name: 新築フラグ
+      src: 新築フラグ
+      default: ''
+      type: string
+    - name: バルコニー方向（１）
+      src: バルコニー方向（１）
+      default: ''
+      type: string
+    - name: バルコニー方向（２）
+      src: バルコニー方向（２）
+      default: ''
+      type: string
+    - name: バルコニー方向（３）
+      src: バルコニー方向（３）
+      default: ''
+      type: string
+    - name: 増改築年月１
+      src: 増改築年月１
+      default: ''
+      type: string
+    - name: 増改築履歴１
+      src: 増改築履歴１
+      default: ''
+      type: string
+    - name: 増改築年月２
+      src: 増改築年月２
+      default: ''
+      type: string
+    - name: 増改築履歴２
+      src: 増改築履歴２
+      default: ''
+      type: string
+    - name: 増改築年月３
+      src: 増改築年月３
+      default: ''
+      type: string
+    - name: 増改築履歴３
+      src: 増改築履歴３
+      default: ''
+      type: string
+    - name: 周辺環境１（フリー）
+      src: 周辺環境１（フリー）
+      default: ''
+      type: string
+    - name: 距離１
+      src: 距離１
+      default: ''
+      type: string
+    - name: 時間１
+      src: 時間１
+      default: ''
+      type: string
+    - name: 周辺アクセス１
+      src: 周辺アクセス１
+      default: ''
+      type: string
+    - name: 周辺環境２（フリー）
+      src: 周辺環境２（フリー）
+      default: ''
+      type: string
+    - name: 距離２
+      src: 距離２
+      default: ''
+      type: string
+    - name: 時間２
+      src: 時間２
+      default: ''
+      type: string
+    - name: 周辺アクセス２
+      src: 周辺アクセス２
+      default: ''
+      type: string
+    - name: 周辺環境３（フリー）
+      src: 周辺環境３（フリー）
+      default: ''
+      type: string
+    - name: 距離３
+      src: 距離３
+      default: ''
+      type: string
+    - name: 時間３
+      src: 時間３
+      default: ''
+      type: string
+    - name: 周辺アクセス３
+      src: 周辺アクセス３
+      default: ''
+      type: string
+    - name: 周辺環境４（フリー）
+      src: 周辺環境４（フリー）
+      default: ''
+      type: string
+    - name: 距離４
+      src: 距離４
+      default: ''
+      type: string
+    - name: 時間４
+      src: 時間４
+      default: ''
+      type: string
+    - name: 周辺アクセス４
+      src: 周辺アクセス４
+      default: ''
+      type: string
+    - name: 周辺環境５（フリー）
+      src: 周辺環境５（フリー）
+      default: ''
+      type: string
+    - name: 距離５
+      src: 距離５
+      default: ''
+      type: string
+    - name: 時間５
+      src: 時間５
+      default: ''
+      type: string
+    - name: 周辺アクセス５
+      src: 周辺アクセス５
+      default: ''
+      type: string
+    - name: 備考１
+      src: 備考１
+      default: ''
+      type: string
+    - name: 備考２
+      src: 備考２
+      default: ''
+      type: string
+    - name: 備考３
+      src: 備考３
+      default: ''
+      type: string
+    - name: 備考４
+      src: 備考４
+      default: ''
+      type: string
+    - name: 設備（フリースペース）
+      src: 設備（フリースペース）
+      default: ''
+      type: string
+    - name: 特記事項（フリースペース）
+      src: 特記事項（フリースペース）
+      default: ''
+      type: string
+    - name: 本体登録メッセージ
+      src: 本体登録メッセージ
+      default: ''
+      type: string
+    - name: "［賃貸］賃貸戸数"
+      src: "［賃貸］賃貸戸数"
+      default: ''
+      type: string
+    - name: "［賃貸］棟総戸数"
+      src: "［賃貸］棟総戸数"
+      default: ''
+      type: string
+    - name: "［賃貸］連棟戸数"
+      src: "［賃貸］連棟戸数"
+      default: ''
+      type: string
+    - name: 鍵交換区分
+      src: 鍵交換区分
+      default: ''
+      type: string
+    - name: 鍵交換代金
+      src: 鍵交換代金
+      default: ''
+      type: string
+    - name: 広告転載区分
+      src: 広告転載区分
+      default: ''
+      type: string
+    - name: 自社管理欄
+      src: 自社管理欄
+      default: ''
+      type: string
+    - name: 証明書発行フラグ
+      src: 証明書発行フラグ
+      default: ''
+      type: string
+    - name: 証明書発行設定フラグ
+      src: 証明書発行設定フラグ
+      default: ''
+      type: string
+    - name: 統計反映区分
+      src: 統計反映区分
+      default: ''
+      type: string
+    - name: システム作成日
+      src: システム作成日
+      default: ''
+      type: string
+    - name: システム更新日
+      src: システム更新日
+      default: ''
+      type: string
+    - name: 更新端末
+      src: 更新端末
+      default: ''
+      type: string
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []

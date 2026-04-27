@@ -1,0 +1,29 @@
+---
+id: 80433
+name: 検証、カウント
+description: ''
+datamart:
+  type: bigquery
+  bigquery_connection_id: 761
+  query_mode: insert
+  query: SELECT COUNT(*) FROM systemn-playground.kimura_test.1024_json
+  destination_dataset: kimura_test
+  destination_table: 1028_count
+  write_disposition: truncate
+  custom_variables:
+  - type: string
+    name: "$count$"
+    value: '1'
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+is_runnable_concurrently: false
+labels: []
+job_schedules: []
+notifications:
+- type: complete
+  notify_when: finished
+  slack_destination:
+    id: 991
+    channel: kimura-test-3
+  message: カウント：$count$
