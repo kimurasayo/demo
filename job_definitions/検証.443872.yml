@@ -1,0 +1,77 @@
+---
+id: 443872
+name: 検証
+description: ''
+user:
+  id: 6335
+  email: sayo.kimura+demo@primenumber.co.jp
+transfer_option:
+  transfer_type: normal
+  in:
+    type: local_file
+    file_name: test0427.csv
+    custom_variables: []
+    parser:
+      type: csv
+      delimiter: ","
+      skip_header_lines: 1
+      trim_if_not_quoted: false
+      quotes_in_quoted_fields: ACCEPT_ONLY_RFC4180_ESCAPED
+      allow_optional_columns: false
+      allow_extra_columns: false
+      max_quoted_size_limit: 131072
+      stop_on_invalid_record: true
+      default_timezone: UTC
+      default_date: '1970-01-01'
+      newline: LF
+      charset: UTF-8
+      columns:
+      - name: c1
+        type: string
+      - name: c2
+        type: string
+      - name: c3
+        type: long
+      - name: c4
+        type: string
+      - name: c5
+        type: long
+      quote: "\""
+      escape: "\""
+    decoders: []
+  out:
+    type: kintone
+    kintone_connection:
+      id: 579
+      name: kintone kimura
+    app_id: '530'
+    mode: insert
+    ignore_nulls: false
+    chunk_size: 100
+  data_settings:
+    columns:
+    - name: c1
+      src: c1
+      default: ''
+      type: string
+    - name: c2
+      src: c2
+      default: ''
+      type: string
+    - name: c3
+      src: c3
+      default: ''
+      type: long
+    - name: c4
+      src: c4
+      default: ''
+      type: string
+    - name: c5
+      src: c5
+      default: ''
+      type: long
+  is_runnable_concurrently: false
+  retry_limit: 0
+labels: []
+job_schedules: []
+notifications: []
